@@ -1,5 +1,5 @@
 /**
- * Jupython Frontend Main Application
+ * Application principale de l’interface Jupython
  * Gère la validation des formulaires et interactions globales
  */
 
@@ -15,7 +15,7 @@ class JupythonApp {
     }
 
     /**
-     * Scroll fluide pour les ancres
+     * Défilement fluide pour les ancres
      */
     setupSmoothScrolling() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -38,13 +38,13 @@ class JupythonApp {
      * Configure les validations des formulaires
      */
     setupFormValidation() {
-        // Contact form - trouvé par la balise form et ses champs
+        // Formulaire de contact : repéré par la balise <form> et ses champs.
         const contactForm = document.querySelector('form[action="/contact"]');
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => this.handleContactSubmit(e));
         }
 
-        // Autres formulaires login/register sont gérés par leurs fichiers .js spécifiques
+        // Les autres formulaires de connexion et d’inscription sont gérés par leurs fichiers JavaScript respectifs.
     }
 
     /**
@@ -91,7 +91,7 @@ class JupythonApp {
                 message: message.value
             });
 
-            this.showSuccess(form, 'Message envoyé avec succès! ✅');
+            this.showSuccess(form, 'Message envoyé avec succès.');
             form.reset();
             setTimeout(() => submitButton.disabled = false, 2000);
             submitButton.textContent = 'Envoyer';
@@ -118,7 +118,7 @@ class JupythonApp {
         const isAuth = api.isAuthenticated();
         const loginLinks = document.querySelectorAll('a[href*="login"]');
 
-        // (à implémenter avec des boutons dynamiques si besoin)
+        // À implémenter avec des boutons dynamiques, si nécessaire.
     }
 
     /**
@@ -140,7 +140,7 @@ class JupythonApp {
         if (element) {
             const errorDiv = document.createElement('div');
             errorDiv.className = 'text-red-500 text-sm mt-1 error-message';
-            errorDiv.textContent = '❌ ' + message;
+            errorDiv.textContent = message;
             element.parentNode.insertBefore(errorDiv, element.nextSibling);
             element.classList.add('border-red-500');
         }
@@ -261,10 +261,10 @@ class JupythonApp {
     }
 
     /**
-     * Configure le feedback des formulaires
+     * Configure les retours des formulaires
      */
     setupFormFeedback() {
-        // Add loading states and feedback for forms
+        // Ajouter des états de chargement et des retours pour les formulaires.
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function () {
                 const submitBtn = this.querySelector('button[type="submit"]');
@@ -277,7 +277,7 @@ class JupythonApp {
     }
 }
 
-// Initialiser l'app au chargement du DOM
+// Initialiser l’application au chargement du DOM.
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         new JupythonApp();
@@ -286,7 +286,7 @@ if (document.readyState === 'loading') {
     new JupythonApp();
 }
 
-// Utility functions
+// Fonctions utilitaires.
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {

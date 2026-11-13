@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-# Create your views here.
+# Créez vos vues ici.
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Academy

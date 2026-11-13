@@ -3,126 +3,949 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Profil utilisateur - Gérencez vos informations et certifications sur Jupython">
+  <meta name="description" content="Profil utilisateur - Gérez vos informations, formations suivies et certificats externes déclarés.">
   <meta name="keywords" content="profil, utilisateur, certifications, académie, IT">
   <title>Mon Profil - Jupython Academy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=sitewide-experience-3">
 </head>
 <body class="bg-gray-950 text-white">
-  <header class="bg-gray-900 shadow sticky top-0 z-50">
+  <header class="jp-academy-header sticky top-0 z-50">
     <div class="max-w-5xl mx-auto flex items-center justify-between py-4 px-6">
       <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-tr from-orange-400 to-orange-600 text-black font-bold rounded-lg w-10 h-10 flex items-center justify-center text-xl">J</div>
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain">
         <span class="text-white font-extrabold text-lg tracking-wide">Jupython</span>
       </div>
       <nav class="flex gap-2 flex-wrap">
         <a href="../index.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Accueil</a>
         <a href="dashboard.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Tableau de bord</a>
         <a href="profile.html" class="bg-orange-500 text-white px-3 py-2 rounded font-semibold shadow hover:bg-orange-600 transition">Profil</a>
-        <a href="login.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Déconnexion</a>
+        <a href="login.html" data-action="logout" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Déconnexion</a>
       </nav>
     </div>
   </header>
 
-  <main class="bg-gray-950 min-h-screen py-12 px-4">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-black text-white mb-8">Mon Profil</h1>
-
-      <!-- Informations Utilisateur -->
-      <div class="bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-8 mb-8">
-        <div class="flex items-center justify-between mb-8 pb-8 border-b border-gray-800">
-          <div class="flex items-center gap-6">
-            <div class="w-24 h-24 bg-gradient-to-tr from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-4xl font-bold">JD</div>
-            <div>
-              <h2 class="text-2xl font-bold text-white mb-2">Jean Dupont</h2>
-              <p class="text-gray-400 mb-1">📧 jean.dupont@example.com</p>
-              <p class="text-gray-400 mb-3">🎓 Université de Kinshasa</p>
-              <span class="inline-block bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm font-semibold">Expert • 2450 points</span>
-            </div>
-          </div>
-          <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold px-6 py-3 rounded-lg transition">Modifier</button>
-        </div>
-
-        <!-- Statistiques -->
-        <div class="grid grid-cols-3 gap-6 mb-8">
-          <div class="bg-gray-800 p-6 rounded-lg text-center">
-            <div class="text-3xl font-black text-orange-400 mb-2">8</div>
-            <p class="text-gray-400">Certifications</p>
-          </div>
-          <div class="bg-gray-800 p-6 rounded-lg text-center">
-            <div class="text-3xl font-black text-orange-400 mb-2">15</div>
-            <p class="text-gray-400">Formations complétées</p>
-          </div>
-          <div class="bg-gray-800 p-6 rounded-lg text-center">
-            <div class="text-3xl font-black text-orange-400 mb-2">3/10</div>
-            <p class="text-gray-400">En cours</p>
-          </div>
-        </div>
-
-        <!-- Données personnelles -->
+  <main hidden class="bg-gray-950 min-h-screen py-12 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h3 class="text-xl font-bold text-white mb-4">Informations personnelles</h3>
-          <div class="space-y-4">
-            <div>
-              <label class="text-gray-400 text-sm">Nom complet</label>
-              <input type="text" value="Jean Dupont" class="w-full mt-2 bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
-            </div>
-            <div>
-              <label class="text-gray-400 text-sm">Email</label>
-              <input type="email" value="jean.dupont@example.com" class="w-full mt-2 bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
-            </div>
-            <div>
-              <label class="text-gray-400 text-sm">Université</label>
-              <input type="text" value="Université de Kinshasa" class="w-full mt-2 bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
-            </div>
-            <div>
-              <label class="text-gray-400 text-sm">Date d'inscription</label>
-              <input type="text" value="15 Janvier 2024" class="w-full mt-2 bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
-            </div>
-          </div>
+          <p class="mb-2 text-sm font-bold uppercase tracking-[0.18em] text-orange-300">Ton espace personnel</p>
+          <h1 class="text-4xl font-black text-white">Mon profil</h1>
+        </div>
+        <div class="flex items-center gap-3">
+          <a data-public-profile-link href="#" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-orange-300 hover:text-orange-200">Voir mon profil public ↗</a>
+          <details data-profile-shortcuts class="relative">
+            <summary aria-label="Ouvrir les raccourcis du profil" class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-xl border border-gray-700 bg-gray-900 text-gray-200 transition hover:border-orange-400/50 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400">
+              <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </summary>
+            <nav aria-label="Raccourcis de mon profil" class="absolute right-0 top-full z-20 mt-2 grid w-60 gap-1 rounded-xl border border-gray-700 bg-gray-900 p-2 shadow-xl">
+              <a href="#security-section" class="rounded-lg px-4 py-3 text-sm font-semibold text-gray-200 transition hover:bg-gray-800 hover:text-orange-300">Sécurité du compte</a>
+              <a href="#profile-enrollments-section" class="rounded-lg px-4 py-3 text-sm font-semibold text-gray-200 transition hover:bg-gray-800 hover:text-orange-300">Mes formations</a>
+              <a href="#certificates" class="rounded-lg px-4 py-3 text-sm font-semibold text-gray-200 transition hover:bg-gray-800 hover:text-orange-300">Envoyer un certificat</a>
+            </nav>
+          </details>
         </div>
       </div>
 
-      <!-- Certifications -->
-      <div class="bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-8">
-        <h3 class="text-2xl font-bold text-white mb-6">Mes Certifications</h3>
-        <div class="space-y-4">
-          <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <div class="text-3xl">🏆</div>
-              <div>
-                <p class="font-bold text-white">Cisco CCNA</p>
-                <p class="text-gray-400 text-sm">Obtenue le 10 Novembre 2024</p>
+      <section class="jp-academy-panel mb-8 overflow-hidden">
+        <div class="grid gap-8 p-6 sm:p-8 md:grid-cols-[minmax(0,1.2fr)_minmax(16rem,0.8fr)] md:items-center">
+          <div class="flex flex-col gap-5 sm:flex-row sm:items-center">
+            <div class="shrink-0 text-center">
+              <div class="relative inline-flex">
+                <button data-profile-photo-button type="button" aria-label="Choisir une photo de profil" class="group relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-3xl border border-white/10 bg-gray-800 shadow-lg shadow-orange-950/40 transition hover:border-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-400 disabled:cursor-wait disabled:opacity-60">
+                  <img data-profile-avatar alt="" class="hidden h-full w-full object-cover">
+                  <svg data-profile-avatar-placeholder aria-hidden="true" viewBox="0 0 24 24" class="h-12 w-12 text-gray-500" fill="currentColor">
+                    <path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.2 0-7.5 2.15-7.5 4.8V21h15v-2.2c0-2.65-3.3-4.8-7.5-4.8Z"></path>
+                  </svg>
+                  <span data-profile-photo-hint aria-hidden="true" class="absolute inset-x-0 bottom-0 bg-black/70 py-1 text-[10px] font-bold text-white opacity-0 transition group-hover:opacity-100 group-focus:opacity-100">Ajouter</span>
+                </button>
               </div>
+              <input data-profile-avatar-upload type="file" accept="image/jpeg,image/png,image/webp" class="hidden">
+              <p data-profile-photo-feedback role="status" aria-live="polite" class="mt-2 max-w-40 text-xs text-gray-400">Appuie sur la photo pour l’agrandir</p>
             </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold">Télécharger</button>
+            <div class="min-w-0">
+              <span class="mb-2 inline-flex rounded-full border border-orange-400/20 bg-orange-500/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-orange-300">Membre Jupython</span>
+              <h2 data-profile-name class="break-words text-2xl font-black text-white">Chargement…</h2>
+              <p class="mt-2 max-w-xl text-sm leading-6 text-gray-400">Personnalise les informations que tu souhaites partager. Ton e-mail et tes informations d’études restent privés.</p>
+            </div>
           </div>
-          <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <div class="text-3xl">🏆</div>
-              <div>
-                <p class="font-bold text-white">Microsoft Azure Administrator</p>
-                <p class="text-gray-400 text-sm">Obtenue le 5 Décembre 2024</p>
-              </div>
-            </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold">Télécharger</button>
-          </div>
-          <div class="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <div class="text-3xl">🏆</div>
-              <div>
-                <p class="font-bold text-white">AWS Solutions Architect</p>
-                <p class="text-gray-400 text-sm">Obtenue le 20 Janvier 2025</p>
-              </div>
-            </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold">Télécharger</button>
+          <div class="flex flex-wrap gap-3 md:justify-end">
+            <button data-action="cancel-edit-profile" class="hidden rounded-lg border border-gray-600 px-5 py-3 font-bold text-white transition hover:bg-gray-800">Annuler</button>
+            <button data-action="edit-profile" class="rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-600">Modifier le profil</button>
           </div>
         </div>
+        <div class="grid grid-cols-1 gap-px border-t border-gray-800 bg-gray-800 sm:grid-cols-3">
+          <div class="bg-gray-950/70 p-5 sm:p-6">
+            <p class="text-3xl font-black text-orange-400" data-profile-enrollment-count>0</p>
+            <p class="mt-1 text-sm text-gray-400">Formations suivies</p>
+          </div>
+          <div class="bg-gray-950/70 p-5 sm:p-6">
+            <p class="text-3xl font-black text-orange-400" data-profile-completed-count>0</p>
+            <p class="mt-1 text-sm text-gray-400">Formations terminées</p>
+          </div>
+          <div class="bg-gray-950/70 p-5 sm:p-6">
+            <p class="text-3xl font-black text-orange-400" data-profile-certificate-count>0</p>
+            <p class="mt-1 text-sm text-gray-400">Certificats déclarés</p>
+          </div>
+        </div>
+      </section>
+
+      <dialog data-profile-photo-dialog aria-label="Photo de profil" class="m-auto max-h-[90vh] max-w-[min(90vw,48rem)] overflow-visible rounded-2xl border border-white/10 bg-gray-950 p-3 text-white shadow-2xl backdrop:bg-black/80">
+        <div class="relative">
+          <button data-profile-photo-close type="button" aria-label="Fermer l’aperçu" class="absolute -right-2 -top-2 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-gray-900 text-xl text-white transition hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-400">×</button>
+          <img data-profile-photo-full alt="Photo de profil agrandie" class="max-h-[82vh] max-w-[min(86vw,46rem)] rounded-xl object-contain">
+        </div>
+        <button data-profile-photo-change type="button" class="mt-3 w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">Modifier la photo</button>
+      </dialog>
+
+      <section class="jp-academy-panel mb-8 p-6 sm:p-8">
+        <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p class="mb-2 text-sm font-bold uppercase tracking-[0.16em] text-orange-300">Ce que les autres voient</p>
+            <h2 class="text-xl font-bold text-white">Aperçu du profil public</h2>
+          </div>
+          <span class="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">Informations choisies par toi</span>
+        </div>
+        <div class="flex flex-col gap-4 rounded-2xl border border-white/5 bg-gray-900/70 p-5 sm:flex-row sm:items-center">
+          <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-orange-500/15 text-lg font-black text-orange-300">
+            <img data-profile-public-avatar alt="" class="hidden h-full w-full object-cover">
+            <svg data-profile-public-placeholder aria-hidden="true" viewBox="0 0 24 24" class="h-8 w-8 text-gray-500" fill="currentColor">
+              <path d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.2 0-7.5 2.15-7.5 4.8V21h15v-2.2c0-2.65-3.3-4.8-7.5-4.8Z"></path>
+            </svg>
+          </div>
+          <div class="min-w-0">
+            <h3 data-profile-public-display-name class="break-words font-bold text-white">Ton nom public</h3>
+            <p data-profile-public-bio class="mt-1 whitespace-pre-wrap break-words text-sm text-gray-400">Ajoute une courte biographie pour te présenter à la communauté.</p>
+          </div>
+        </div>
+      </section>
+
+      <details data-private-profile-details class="jp-academy-panel mb-8 group">
+        <summary class="flex cursor-pointer list-none flex-wrap items-center justify-between gap-4 p-6 sm:p-8">
+          <span>
+            <span class="block text-lg font-bold text-white">Informations personnelles et confidentialité</span>
+            <span class="mt-1 block text-sm text-gray-400">E-mail, établissement et autres informations privées — visibles uniquement par toi.</span>
+          </span>
+          <span class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-semibold text-orange-300 group-open:hidden">Afficher</span>
+          <span class="hidden rounded-lg border border-gray-700 px-4 py-2 text-sm font-semibold text-orange-300 group-open:inline">Masquer</span>
+        </summary>
+        <div class="border-t border-gray-800 px-6 pb-6 pt-5 sm:px-8 sm:pb-8">
+          <div class="mb-6 flex flex-wrap items-start gap-3 rounded-xl border border-sky-400/15 bg-sky-400/5 p-4">
+            <span aria-hidden="true" class="text-sky-300">🔒</span>
+            <p class="text-sm leading-6 text-gray-300">Seuls ton nom ou pseudo public, ta photo et ta biographie peuvent apparaître sur le profil public. Ton e-mail, ton nom complet, ton université, ta promotion et tes données d’apprentissage ne sont pas affichés aux autres membres.</p>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2">
+            <div class="md:col-span-2">
+              <h3 class="mb-4 text-base font-bold text-white">Présentation publique</h3>
+              <div class="grid gap-4">
+                <label for="profile-public-name" class="grid gap-2 text-sm text-gray-400">Nom ou pseudo public
+                  <input id="profile-public-name" data-profile-public-name maxlength="60" type="text" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+                </label>
+                <label for="profile-bio" class="grid gap-2 text-sm text-gray-400">Biographie publique (280 caractères maximum)
+                  <textarea id="profile-bio" data-profile-bio maxlength="280" rows="3" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly></textarea>
+                </label>
+                <p class="text-xs text-gray-500">Pour changer ta photo, appuie directement sur l’image en haut du profil. Formats acceptés : JPEG, PNG ou WebP (5 Mo maximum).</p>
+              </div>
+            </div>
+            <div class="md:col-span-2">
+              <h3 class="mb-4 border-t border-gray-800 pt-5 text-base font-bold text-white">Informations privées du compte</h3>
+            </div>
+            <label for="profile-fullname" class="grid gap-2 text-sm text-gray-400">Nom complet
+              <input id="profile-fullname" data-profile-fullname type="text" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+            </label>
+            <label for="profile-email" class="grid gap-2 text-sm text-gray-400">Adresse e-mail
+              <input id="profile-email" data-profile-email-input type="email" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+            </label>
+            <label for="profile-promotion" class="grid gap-2 text-sm text-gray-400">Promotion
+              <input id="profile-promotion" data-profile-promotion type="text" maxlength="50" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+            </label>
+            <label for="profile-university" class="grid gap-2 text-sm text-gray-400">Université ou établissement
+              <input id="profile-university" data-profile-university-input type="text" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+            </label>
+            <label class="grid gap-2 text-sm text-gray-400">Membre depuis
+              <input data-profile-joined type="text" class="w-full rounded-lg border border-gray-700 bg-gray-800 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400" readonly>
+            </label>
+            <p class="self-end pb-3 text-xs leading-5 text-gray-500">Ces informations servent à personnaliser ton expérience et ne figurent pas sur ta page publique.</p>
+          </div>
+        </div>
+      </details>
+
+      <section class="mb-8 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
+        <div>
+          <div class="mb-5 rounded-2xl border border-white/10 bg-gray-900/80 p-6 sm:p-8">
+            <div>
+              <p class="mb-2 text-sm font-bold uppercase tracking-[0.16em] text-orange-300">La communauté Jupython</p>
+              <h2 class="text-2xl font-black text-white">Actualités & conseils tech</h2>
+              <p class="mt-2 text-sm text-gray-400">Les dernières ressources pour avancer dans ton parcours numérique.</p>
+            </div>
+          </div>
+          <div class="space-y-5">
+            <article class="overflow-hidden rounded-2xl border border-white/10 bg-gray-900 shadow-lg shadow-black/10">
+              <div class="flex items-center gap-3 p-5 pb-4">
+                <img src="/images/logo%20jupython.png" alt="" class="h-11 w-11 rounded-full border border-white/10 bg-gray-800 object-contain p-1">
+                <div class="min-w-0 flex-1">
+                  <p class="font-bold text-white">Jupython</p>
+                  <p class="mt-0.5 text-xs text-gray-400">Conseils tech · Certifications</p>
+                </div>
+              </div>
+              <div class="px-5 pb-4">
+                <h3 class="text-lg font-bold text-white">Comment réussir vos certifications IT</h3>
+                <p class="mt-2 text-sm leading-6 text-gray-300">Découvre des stratégies pour préparer tes certifications et faire évoluer tes compétences.</p>
+              </div>
+              <img src="/images/technology-lab.webp" alt="Laboratoire numérique et infrastructures informatiques" loading="lazy" class="max-h-80 w-full object-cover">
+              <div class="p-5 pt-4">
+                <a href="../article-certifications.html" class="inline-flex rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">Lire l’article <span aria-hidden="true" class="ml-2">→</span></a>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-2xl border border-white/10 bg-gray-900 shadow-lg shadow-black/10">
+              <div class="flex items-center gap-3 p-5 pb-4">
+                <img src="/images/logo%20jupython.png" alt="" class="h-11 w-11 rounded-full border border-white/10 bg-gray-800 object-contain p-1">
+                <div class="min-w-0 flex-1">
+                  <p class="font-bold text-white">Jupython</p>
+                  <p class="mt-0.5 text-xs text-gray-400">Actualité · Numérique en Afrique</p>
+                </div>
+              </div>
+              <div class="px-5 pb-4">
+                <h3 class="text-lg font-bold text-white">Le numérique et les opportunités en Afrique</h3>
+                <p class="mt-2 text-sm leading-6 text-gray-300">Explore les possibilités offertes par les compétences numériques aux apprenants africains.</p>
+              </div>
+              <img src="/images/digital-network.webp" alt="Réseau numérique lumineux" loading="lazy" class="max-h-80 w-full object-cover">
+              <div class="p-5 pt-4">
+                <a href="../article-afrique.html" class="inline-flex rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">Lire l’article <span aria-hidden="true" class="ml-2">→</span></a>
+              </div>
+            </article>
+            <article class="overflow-hidden rounded-2xl border border-white/10 bg-gray-900 shadow-lg shadow-black/10">
+              <div class="flex items-center gap-3 p-5 pb-4">
+                <img src="/images/logo%20jupython.png" alt="" class="h-11 w-11 rounded-full border border-white/10 bg-gray-800 object-contain p-1">
+                <div class="min-w-0 flex-1">
+                  <p class="font-bold text-white">Jupython</p>
+                  <p class="mt-0.5 text-xs text-gray-400">Ressources · Apprentissage</p>
+                </div>
+              </div>
+              <div class="px-5 pb-4">
+                <h3 class="text-lg font-bold text-white">Découvrir des plateformes de cours gratuites</h3>
+                <p class="mt-2 text-sm leading-6 text-gray-300">Trouve des ressources externes pour compléter ton parcours d’apprentissage.</p>
+              </div>
+              <img src="/images/learning-lab.webp" alt="Postes de travail dédiés aux technologies" loading="lazy" class="max-h-80 w-full object-cover">
+              <div class="p-5 pt-4">
+                <a href="../article-plateformes.html" class="inline-flex rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">Lire l’article <span aria-hidden="true" class="ml-2">→</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <section class="jp-academy-panel p-6">
+            <div class="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p class="mb-1 text-xs font-bold uppercase tracking-wider text-orange-300">Élargis ton réseau</p>
+                <h2 class="text-lg font-bold text-white">Membres à suivre</h2>
+              </div>
+              <a href="../rankings.html" class="text-xs font-semibold text-orange-300 hover:text-orange-200">Voir tout →</a>
+            </div>
+            <div data-feed-suggestions class="space-y-3" aria-live="polite">
+              <p class="text-sm text-gray-400">Chargement des suggestions…</p>
+            </div>
+          </section>
+          <section class="jp-academy-panel p-6">
+            <div class="mb-5 flex items-center justify-between gap-3">
+              <div>
+                <p class="mb-1 text-xs font-bold uppercase tracking-wider text-sky-300">Communauté</p>
+                <h2 class="text-lg font-bold text-white">Classement des membres</h2>
+              </div>
+              <a href="../rankings.html" class="text-xs font-semibold text-orange-300 hover:text-orange-200">Classement →</a>
+            </div>
+            <div data-feed-leaderboard class="space-y-3" aria-live="polite">
+              <p class="text-sm text-gray-400">Chargement du classement…</p>
+            </div>
+            <p class="mt-4 border-t border-gray-800 pt-3 text-xs leading-5 text-gray-500">Le classement utilise les scores Jupython enregistrés. Le nombre d’abonnés sert uniquement à départager les scores égaux.</p>
+          </section>
+        </div>
+      </section>
+
+      <details id="profile-tools-details" class="jp-academy-panel mb-8 group">
+        <summary class="flex cursor-pointer list-none flex-wrap items-center justify-between gap-4 p-6 sm:p-8">
+          <span>
+            <span class="block text-lg font-bold text-white">Outils de mon compte</span>
+            <span class="mt-1 block text-sm text-gray-400">Sécurité, formations et gestion des certificats.</span>
+          </span>
+          <span class="rounded-lg border border-gray-700 px-4 py-2 text-sm font-semibold text-orange-300 group-open:hidden">Afficher</span>
+          <span class="hidden rounded-lg border border-gray-700 px-4 py-2 text-sm font-semibold text-orange-300 group-open:inline">Masquer</span>
+        </summary>
+        <div class="border-t border-gray-800 p-4 sm:p-6">
+      <section id="security-section" class="jp-academy-panel p-6 md:p-8 mb-8 scroll-mt-24">
+        <h3 class="text-2xl font-bold text-white mb-4">Sécurité du compte</h3>
+        <form data-password-change class="grid gap-4 sm:grid-cols-2">
+          <label data-current-password-field class="grid gap-2 text-sm text-gray-300">Mot de passe actuel
+            <input name="current_password" type="password" autocomplete="current-password" required class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+          </label>
+          <span class="hidden sm:block" aria-hidden="true"></span>
+          <label class="grid gap-2 text-sm text-gray-300">Nouveau mot de passe
+            <input name="password" type="password" autocomplete="new-password" minlength="8" required class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+          </label>
+          <label class="grid gap-2 text-sm text-gray-300">Confirmer le nouveau mot de passe
+            <input name="confirm_password" type="password" autocomplete="new-password" minlength="8" required class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+          </label>
+          <div class="sm:col-span-2">
+            <button type="submit" class="jp-button-primary">Modifier le mot de passe</button>
+            <p data-password-feedback class="mt-3 text-sm text-gray-300" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <section id="profile-enrollments-section" class="jp-academy-panel p-8 mb-8 scroll-mt-24">
+        <h3 class="text-2xl font-bold text-white mb-6">Mes formations</h3>
+        <div data-profile-enrollments class="grid gap-4 sm:grid-cols-2">
+          <p class="text-gray-400">Chargement des formations…</p>
+        </div>
+      </section>
+
+      <!-- Certificats externes -->
+      <div id="certificates" class="jp-academy-panel p-8">
+        <h3 class="text-2xl font-bold text-white mb-3">Mes certificats externes</h3>
+        <p class="text-sm text-gray-400 mb-6">Les certificats et badges sont délivrés par l’organisme de formation, pas par Jupython. Tu peux joindre un PDF ou une image (10 Mo maximum), ou indiquer le lien HTTPS du certificat. Jupython peut examiner le justificatif fourni, sans confirmer son authenticité auprès de l’émetteur.</p>
+        <div data-profile-certificates class="space-y-4">
+          <p class="text-gray-400">Chargement des justificatifs…</p>
+        </div>
+        <p data-no-external-courses class="hidden mt-6 text-sm text-gray-400">
+          Aucune formation externe n’est disponible dans le catalogue pour le moment.
+          <a href="../courses.html" class="text-orange-300 underline">Voir les formations</a>.
+        </p>
+        <form data-certificate-submission class="mt-8 grid gap-4 border-t border-gray-700 pt-6">
+          <h4 class="text-lg font-bold text-white">Déclarer un certificat obtenu chez un fournisseur</h4>
+          <p class="text-sm text-gray-400">Choisis le cours externe pour lequel tu as obtenu ce certificat, puis joins le document ou colle son lien HTTPS. Il n’est pas nécessaire d’avoir ajouté le cours à tes formations Jupython. La revue porte sur le justificatif fourni, pas sur sa validation auprès de l’émetteur.</p>
+          <label class="grid gap-2 text-sm text-gray-300">
+            Cours externe concerné
+            <select name="formation_id" required class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+              <option value="">Choisir une formation suivie</option>
+            </select>
+          </label>
+          <label class="grid gap-2 text-sm text-gray-300">
+            Fichier PDF ou image (10 Mo maximum)
+            <input name="certificate_file" type="file" accept=".pdf,.jpg,.jpeg,.png,.webp,application/pdf,image/jpeg,image/png,image/webp" class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+          </label>
+          <label class="grid gap-2 text-sm text-gray-300">
+            Ou lien HTTPS du certificat
+            <input name="certificate_url" type="url" pattern="https://.*" placeholder="https://…" class="rounded-lg border border-gray-700 bg-gray-900 px-4 py-3 text-white">
+          </label>
+          <div>
+            <button type="submit" class="jp-button-primary">Envoyer le justificatif</button>
+            <p data-certificate-feedback class="mt-3 text-sm text-gray-300" role="status" aria-live="polite"></p>
+          </div>
+        </form>
       </div>
+        </div>
+      </details>
     </div>
   </main>
 
-  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/api.js?v=certificate-file-upload-1"></script>
+  <script src="../assets/js/auth-ui.js?v=account-menu-3"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/mobile-menu.js?v=academy-design-1"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const main = document.querySelector('main');
+      const profileShortcuts = document.querySelector('[data-profile-shortcuts]');
+      profileShortcuts.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+        if (link) {
+          const target = document.querySelector(link.getAttribute('href'));
+          const accountTools = target?.closest('#profile-tools-details');
+          if (accountTools) accountTools.open = true;
+          profileShortcuts.open = false;
+        }
+      });
+      try {
+        const profile = await api.getProfile();
+        if (!profile) throw new Error('Session indisponible');
+        const [certificates, enrollments] = await Promise.all([
+          api.getMyCertificates(),
+          api.getMyEnrollments(),
+        ]);
+        main.hidden = false;
+        const fullName = [profile.first_name, profile.last_name].filter(Boolean).join(' ') || profile.username;
+        document.querySelector('[data-profile-name]').textContent = fullName;
+        const fullnameInput = document.querySelector('[data-profile-fullname]');
+        const emailInput = document.querySelector('[data-profile-email-input]');
+        const universityInput = document.querySelector('[data-profile-university-input]');
+        const promotionInput = document.querySelector('[data-profile-promotion]');
+        document.querySelector('[data-current-password-field]').hidden = !profile.has_usable_password;
+        const publicNameInput = document.querySelector('[data-profile-public-name]');
+        const bioInput = document.querySelector('[data-profile-bio]');
+        const avatarInput = document.querySelector('[data-profile-avatar-upload]');
+        const avatarButton = document.querySelector('[data-profile-photo-button]');
+        const avatarHint = document.querySelector('[data-profile-photo-hint]');
+        const avatarDialog = document.querySelector('[data-profile-photo-dialog]');
+        const avatarDialogImage = document.querySelector('[data-profile-photo-full]');
+        const avatarDialogClose = document.querySelector('[data-profile-photo-close]');
+        const avatarDialogChange = document.querySelector('[data-profile-photo-change]');
+        const avatarFeedback = document.querySelector('[data-profile-photo-feedback]');
+        const avatarImage = document.querySelector('[data-profile-avatar]');
+        const editButton = document.querySelector('[data-action="edit-profile"]');
+        const cancelButton = document.querySelector('[data-action="cancel-edit-profile"]');
+        const privateDetails = document.querySelector('[data-private-profile-details]');
+        const feedSuggestions = document.querySelector('[data-feed-suggestions]');
+        const feedLeaderboard = document.querySelector('[data-feed-leaderboard]');
+        const publicProfileLink = document.querySelector('[data-public-profile-link]');
+        const publicDisplayName = document.querySelector('[data-profile-public-display-name]');
+        const publicBio = document.querySelector('[data-profile-public-bio]');
+        const publicAvatar = document.querySelector('[data-profile-public-avatar]');
+        const publicAvatarPlaceholder = document.querySelector('[data-profile-public-placeholder]');
+        const avatarPlaceholder = document.querySelector('[data-profile-avatar-placeholder]');
+        let accountHasName = Boolean(profile.first_name || profile.last_name);
+        let pendingAvatarPreviewUrl = '';
+        let currentAvatarUrl = profile.avatar
+          ? new URL(profile.avatar, window.location.origin).href
+          : '';
+        const getAvatarToView = () => pendingAvatarPreviewUrl || currentAvatarUrl;
+        const updateAvatarAction = () => {
+          const canView = Boolean(getAvatarToView());
+          avatarButton.setAttribute('aria-label', canView ? 'Voir la photo de profil' : 'Choisir une photo de profil');
+          avatarHint.textContent = canView ? 'Voir' : 'Ajouter';
+        };
+        avatarImage.addEventListener('error', () => {
+          avatarImage.classList.add('hidden');
+          avatarPlaceholder.classList.remove('hidden');
+        });
+        publicAvatar.addEventListener('error', () => {
+          publicAvatar.classList.add('hidden');
+          publicAvatarPlaceholder.classList.remove('hidden');
+        });
+      fullnameInput.value = fullName;
+      emailInput.value = profile.email || '';
+      universityInput.value = profile.university || '';
+      promotionInput.value = profile.promotion || '';
+      publicNameInput.value = profile.public_name || '';
+      bioInput.value = profile.bio || '';
+      document.querySelector('[data-profile-joined]').value = profile.date_joined
+        ? new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long' }).format(new Date(profile.date_joined))
+        : '';
+      publicProfileLink.href = `member.html?id=${encodeURIComponent(profile.id)}`;
+      const renderCommunityMembers = (members) => {
+        const otherMembers = members.filter((member) => String(member.id) !== String(profile.id));
+        const suggestions = otherMembers
+          .filter((member) => !member.is_following)
+          .sort((first, second) => second.follower_count - first.follower_count)
+          .slice(0, 4);
+        const leaders = otherMembers
+          .filter((member) => Number.isInteger(member.score))
+          .sort((first, second) => second.score - first.score || second.follower_count - first.follower_count)
+          .slice(0, 5);
+        feedSuggestions.replaceChildren();
+        feedLeaderboard.replaceChildren();
+
+        if (!suggestions.length) {
+          const empty = document.createElement('p');
+          empty.className = 'text-sm text-gray-400';
+          empty.textContent = otherMembers.length
+            ? 'Tu suis déjà tous les membres proposés.'
+            : 'Aucun autre profil public pour le moment.';
+          feedSuggestions.appendChild(empty);
+        }
+
+        if (!leaders.length) {
+          const empty = document.createElement('p');
+          empty.className = 'text-sm text-gray-400';
+          empty.textContent = 'Le classement apparaîtra dès que des scores Jupython seront enregistrés.';
+          feedLeaderboard.appendChild(empty);
+        }
+
+        const createMemberCard = (member, index, showFollowButton) => {
+          const card = document.createElement('article');
+          card.className = 'flex flex-wrap items-center gap-3 rounded-xl border border-white/5 bg-gray-900/60 p-3';
+          if (!showFollowButton) {
+            const rank = document.createElement('span');
+            rank.className = 'w-6 shrink-0 text-center text-sm font-black text-orange-300';
+            rank.textContent = `${index + 1}`;
+            card.appendChild(rank);
+          }
+
+          const avatar = document.createElement('div');
+          avatar.className = 'flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gray-800';
+          const placeholder = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          placeholder.setAttribute('viewBox', '0 0 24 24');
+          placeholder.setAttribute('aria-hidden', 'true');
+          placeholder.setAttribute('class', 'h-6 w-6 text-gray-500');
+          placeholder.setAttribute('fill', 'currentColor');
+          const placeholderPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          placeholderPath.setAttribute('d', 'M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.2 0-7.5 2.15-7.5 4.8V21h15v-2.2c0-2.65-3.3-4.8-7.5-4.8Z');
+          placeholder.appendChild(placeholderPath);
+          avatar.appendChild(placeholder);
+          if (member.avatar) {
+            const image = document.createElement('img');
+            image.src = new URL(member.avatar, window.location.origin).href;
+            image.alt = '';
+            image.className = 'h-full w-full object-cover';
+            image.addEventListener('error', () => image.remove());
+            image.addEventListener('load', () => placeholder.remove());
+            avatar.appendChild(image);
+          }
+
+          const details = document.createElement('div');
+          details.className = 'min-w-0 flex-1';
+          const nameLink = document.createElement('a');
+          nameLink.href = `member.html?id=${encodeURIComponent(member.id)}`;
+          nameLink.className = 'block truncate text-sm font-bold text-white hover:text-orange-300';
+          nameLink.textContent = member.display_name;
+          const followerCount = document.createElement('p');
+          followerCount.className = 'mt-1 text-xs text-gray-400';
+          followerCount.textContent = showFollowButton
+            ? `${member.follower_count} abonné${member.follower_count === 1 ? '' : 's'}`
+            : `${member.score} point${member.score === 1 ? '' : 's'}`;
+          details.append(nameLink, followerCount);
+          card.append(avatar, details);
+
+          if (showFollowButton) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'shrink-0 rounded-lg border border-orange-400/30 px-3 py-2 text-xs font-bold text-orange-300 transition hover:bg-orange-400/10 disabled:opacity-50';
+            button.textContent = member.is_following ? 'Suivi' : 'Suivre';
+            button.setAttribute('aria-pressed', String(member.is_following));
+            button.addEventListener('click', async () => {
+              button.disabled = true;
+              try {
+                const result = member.is_following
+                  ? await api.unfollowUser(member.id)
+                  : await api.followUser(member.id);
+                member.is_following = result.is_following;
+                member.follower_count = result.follower_count;
+                renderCommunityMembers(members);
+              } catch (error) {
+                button.disabled = false;
+                let feedback = card.querySelector('[role="status"]');
+                if (!feedback) {
+                  feedback = document.createElement('p');
+                  feedback.className = 'basis-full text-xs text-red-300';
+                  feedback.setAttribute('role', 'status');
+                  card.appendChild(feedback);
+                }
+                feedback.textContent = error.data?.detail || error.message || 'Impossible de mettre à jour le suivi.';
+              }
+            });
+            card.appendChild(button);
+          }
+          return card;
+        };
+
+        suggestions.forEach((member, index) => {
+          feedSuggestions.appendChild(createMemberCard(member, index, true));
+        });
+        leaders.forEach((member, index) => {
+          feedLeaderboard.appendChild(createMemberCard(member, index, false));
+        });
+      };
+
+      try {
+        const members = await api.request('/ranking/');
+        renderCommunityMembers(Array.isArray(members) ? members : []);
+      } catch (error) {
+        console.error('Impossible de charger le fil de la communauté:', error);
+        [feedSuggestions, feedLeaderboard].forEach((container) => {
+          const message = document.createElement('p');
+          message.className = 'text-sm text-red-300';
+          message.textContent = 'Impossible de charger la communauté. Réessaie plus tard.';
+          container.replaceChildren(message);
+        });
+      }
+
+      const updatePublicPreview = () => {
+        const accountName = fullnameInput.value.trim();
+        const name = publicNameInput.value.trim()
+          || (accountName && (accountHasName || accountName !== profile.username) ? accountName : 'Membre Jupython');
+        const bio = bioInput.value.trim();
+        const avatarUrl = pendingAvatarPreviewUrl || currentAvatarUrl;
+        publicDisplayName.textContent = name;
+        publicBio.textContent = bio || 'Ajoute une courte biographie pour te présenter à la communauté.';
+        publicAvatar.classList.toggle('hidden', !avatarUrl);
+        publicAvatarPlaceholder.classList.toggle('hidden', Boolean(avatarUrl));
+        if (avatarUrl) publicAvatar.src = avatarUrl;
+      };
+      if (profile.avatar) {
+        avatarImage.src = currentAvatarUrl;
+        avatarImage.classList.remove('hidden');
+        avatarPlaceholder.classList.add('hidden');
+      }
+      updateAvatarAction();
+      avatarFeedback.textContent = getAvatarToView()
+        ? 'Appuie sur la photo pour l’agrandir'
+        : 'Appuie sur la photo pour en ajouter une';
+      updatePublicPreview();
+      document.querySelector('[data-profile-certificate-count]').textContent = certificates.length;
+      document.querySelector('[data-profile-completed-count]').textContent =
+        enrollments.filter((enrollment) => enrollment.status === 'completed').length;
+      document.querySelector('[data-profile-enrollment-count]').textContent = enrollments.length;
+      const enrollmentList = document.querySelector('[data-profile-enrollments]');
+      const certificateForm = document.querySelector('[data-certificate-submission]');
+      const certificateFormationSelect = certificateForm.elements.formation_id;
+      let externalFormations = [];
+      try {
+        const catalog = await api.getFormations();
+        externalFormations = (Array.isArray(catalog) ? catalog : catalog.results || [])
+          .filter((formation) => !formation.hosted_by_jupython);
+      } catch (error) {
+        console.error('Impossible de charger les formations externes:', error);
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'Impossible de charger le catalogue. Réessaie plus tard.';
+        option.disabled = true;
+        certificateFormationSelect.appendChild(option);
+      }
+      const canSubmitCertificate = externalFormations.length > 0;
+      certificateForm.hidden = !canSubmitCertificate;
+      certificateForm.classList.toggle('hidden', !canSubmitCertificate);
+      document.querySelector('[data-no-external-courses]').classList.toggle('hidden', canSubmitCertificate);
+      externalFormations.forEach((formation) => {
+        const option = document.createElement('option');
+        option.value = formation.id;
+        option.textContent = `${formation.title} — ${formation.platform}`;
+        certificateFormationSelect.appendChild(option);
+      });
+      enrollmentList.replaceChildren();
+      if (!enrollments.length) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.className = 'text-gray-400 sm:col-span-2';
+        emptyMessage.textContent = 'Tu ne suis pas encore de formation.';
+        enrollmentList.appendChild(emptyMessage);
+      } else {
+        enrollments.forEach((enrollment) => {
+          const card = document.createElement('article');
+          card.className = 'bg-gray-800 rounded-lg p-5';
+          const title = document.createElement('h4');
+          title.className = 'font-bold text-white mb-2';
+          title.textContent = enrollment.formation.title;
+          const platform = document.createElement('p');
+          platform.className = 'text-gray-400 text-sm mb-4';
+          platform.textContent = enrollment.formation.platform || 'Formation';
+          const progress = document.createElement('p');
+          progress.className = 'text-gray-300 text-sm mb-4';
+          const hasCurriculum = enrollment.progress?.has_curriculum;
+          const statusLabels = {
+            enrolled: 'Inscrit',
+            in_progress: 'En cours',
+            completed: hasCurriculum ? 'Parcours terminé' : 'Terminé — progression déclarée',
+          };
+          progress.textContent = `État : ${statusLabels[enrollment.status] || statusLabels.enrolled}`;
+          const link = document.createElement('a');
+          link.className = 'text-orange-400 hover:text-orange-300 font-semibold';
+          link.href = hasCurriculum
+            ? `learn.html?formation=${encodeURIComponent(enrollment.formation.id)}`
+            : enrollment.formation.link;
+          if (!hasCurriculum) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          }
+          link.textContent = hasCurriculum ? 'Continuer les leçons →' : 'Continuer sur la plateforme →';
+          card.append(title, platform, progress);
+          if (hasCurriculum) {
+            const details = document.createElement('p');
+            details.className = 'text-gray-400 text-sm mb-3';
+            details.textContent = `${enrollment.progress.completed_lessons}/${enrollment.progress.total_lessons} leçons terminées — ${enrollment.progress.percent} %`;
+            card.appendChild(details);
+          }
+          card.appendChild(link);
+          enrollmentList.appendChild(card);
+        });
+      }
+      const certificateList = document.querySelector('[data-profile-certificates]');
+      certificateList.replaceChildren();
+      if (certificates.length === 0) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.className = 'text-gray-400';
+        emptyMessage.textContent = 'Aucun certificat externe déclaré.';
+        certificateList.appendChild(emptyMessage);
+      } else {
+        certificates.forEach((certificate) => {
+          const entry = document.createElement('div');
+          entry.className = 'bg-gray-800 p-4 rounded-lg flex items-center justify-between';
+          const details = document.createElement('div');
+          details.className = 'flex items-center gap-4';
+          const icon = document.createElement('div');
+          icon.className = 'w-10 h-10 rounded-lg bg-orange-500/15 text-orange-400 flex items-center justify-center font-bold';
+          icon.textContent = 'CERT';
+          const text = document.createElement('div');
+          const title = document.createElement('p');
+          title.className = 'font-bold text-white';
+          title.textContent = certificate.formation_title || 'Certification';
+          const status = document.createElement('p');
+          status.className = 'text-gray-400 text-sm';
+          status.textContent = certificate.verified
+            ? 'Justificatif examiné par Jupython'
+            : 'Justificatif en attente d’examen';
+          const certificateLink = document.createElement('a');
+          certificateLink.className = 'text-orange-300 hover:text-orange-200 text-sm font-semibold';
+          if (certificate.certificate_file_available) {
+            certificateLink.href = '#';
+            certificateLink.textContent = 'Télécharger le justificatif';
+            certificateLink.addEventListener('click', async (event) => {
+              event.preventDefault();
+              try {
+                await api.downloadCertificate(certificate.id);
+              } catch (error) {
+                console.error('Impossible de télécharger le justificatif:', error);
+                status.textContent = error.message || 'Téléchargement impossible.';
+              }
+            });
+          } else {
+            certificateLink.href = certificate.certificate_url;
+            certificateLink.target = '_blank';
+            certificateLink.rel = 'noopener noreferrer';
+            certificateLink.textContent = 'Voir le certificat';
+          }
+          text.append(title, status, certificateLink);
+          details.append(icon, text);
+          entry.appendChild(details);
+          certificateList.appendChild(entry);
+        });
+      }
+
+      document.querySelector('[data-password-change]').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const feedback = form.querySelector('[data-password-feedback]');
+        const button = form.querySelector('button[type="submit"]');
+        const currentPassword = form.elements.current_password.value;
+        const password = form.elements.password.value;
+        const confirmation = form.elements.confirm_password.value;
+        if (password !== confirmation) {
+          feedback.textContent = 'Les nouveaux mots de passe ne correspondent pas.';
+          return;
+        }
+        button.disabled = true;
+        feedback.textContent = 'Mise à jour du mot de passe…';
+        try {
+          await api.changePassword(currentPassword, password, confirmation);
+          form.reset();
+          feedback.textContent = 'Mot de passe modifié. Ta session reste active.';
+        } catch (error) {
+          feedback.textContent = error.data
+            ? Object.values(error.data).flat().join(' ')
+            : (error.message || 'Impossible de modifier le mot de passe. Réessaie.');
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      certificateForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitButton = certificateForm.querySelector('button[type="submit"]');
+        const feedback = certificateForm.querySelector('[data-certificate-feedback]');
+        submitButton.disabled = true;
+        feedback.textContent = 'Envoi du justificatif…';
+        try {
+          const certificateUrl = certificateForm.elements.certificate_url.value.trim();
+          const certificateFile = certificateForm.elements.certificate_file.files[0];
+          if (Boolean(certificateUrl) === Boolean(certificateFile)) {
+            throw new Error('Ajoute soit un fichier, soit un lien HTTPS — pas les deux.');
+          }
+          const submitted = await api.submitCertificate(
+            certificateFormationSelect.value,
+            certificateUrl,
+            certificateFile,
+          );
+          certificates.push(submitted);
+          document.querySelector('[data-profile-certificate-count]').textContent = certificates.length;
+          if (certificates.length === 1) certificateList.replaceChildren();
+          const entry = document.createElement('div');
+          entry.className = 'bg-gray-800 p-4 rounded-lg flex flex-wrap items-center justify-between gap-3';
+          const title = document.createElement('p');
+          title.className = 'font-bold text-white';
+          title.textContent = submitted.formation_title || 'Certificat';
+          const verification = document.createElement('p');
+          verification.className = 'text-gray-400 text-sm';
+          verification.textContent = 'Justificatif en attente d’examen';
+          const certificateLink = document.createElement('a');
+          certificateLink.className = 'text-orange-300 hover:text-orange-200 text-sm font-semibold';
+          if (submitted.certificate_file_available) {
+            certificateLink.href = '#';
+            certificateLink.textContent = 'Télécharger le justificatif';
+            certificateLink.addEventListener('click', async (clickEvent) => {
+              clickEvent.preventDefault();
+              try {
+                await api.downloadCertificate(submitted.id);
+              } catch (error) {
+                console.error('Impossible de télécharger le justificatif:', error);
+                feedback.textContent = error.message || 'Téléchargement impossible.';
+              }
+            });
+          } else {
+            certificateLink.href = submitted.certificate_url;
+            certificateLink.target = '_blank';
+            certificateLink.rel = 'noopener noreferrer';
+            certificateLink.textContent = 'Voir le certificat';
+          }
+          entry.append(title, verification, certificateLink);
+          certificateList.appendChild(entry);
+          feedback.textContent = 'Justificatif envoyé. Jupython examinera le document sans confirmer le certificat auprès de son émetteur.';
+          certificateForm.reset();
+        } catch (error) {
+          console.error('Impossible de soumettre le certificat:', error);
+          feedback.textContent = error.message || 'L’envoi a échoué. Vérifie le fichier ou le lien puis réessaie.';
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      const setEditing = (editing) => {
+        [fullnameInput, emailInput, universityInput, promotionInput, publicNameInput, bioInput].forEach((input) => input.readOnly = !editing);
+        privateDetails.open = editing;
+        cancelButton.classList.toggle('hidden', !editing);
+        editButton.textContent = editing ? 'Enregistrer' : 'Modifier le profil';
+        editButton.dataset.editing = String(editing);
+        if (editing) privateDetails.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      [fullnameInput, publicNameInput, bioInput].forEach((input) => {
+        input.addEventListener('input', updatePublicPreview);
+      });
+
+      avatarButton.addEventListener('click', () => {
+        const avatarUrl = getAvatarToView();
+        if (!avatarUrl) {
+          avatarInput.click();
+          return;
+        }
+        avatarDialogImage.src = avatarUrl;
+        avatarDialog.showModal();
+      });
+      avatarDialogClose.addEventListener('click', () => avatarDialog.close());
+      avatarDialogChange.addEventListener('click', () => {
+        avatarDialog.close();
+        avatarInput.click();
+      });
+      avatarDialog.addEventListener('click', (event) => {
+        if (event.target === avatarDialog) avatarDialog.close();
+      });
+
+      avatarInput.addEventListener('change', async () => {
+        const file = avatarInput.files[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+          avatarInput.value = '';
+          avatarFeedback.textContent = 'La photo ne doit pas dépasser 5 Mo.';
+          avatarFeedback.classList.add('text-red-300');
+          return;
+        }
+        if (pendingAvatarPreviewUrl) URL.revokeObjectURL(pendingAvatarPreviewUrl);
+        pendingAvatarPreviewUrl = URL.createObjectURL(file);
+        avatarImage.src = pendingAvatarPreviewUrl;
+        avatarImage.classList.remove('hidden');
+        avatarPlaceholder.classList.add('hidden');
+        updateAvatarAction();
+        updatePublicPreview();
+        avatarButton.disabled = true;
+        avatarFeedback.classList.remove('text-red-300');
+        avatarFeedback.textContent = 'Enregistrement de la photo…';
+
+        try {
+          const formData = new FormData();
+          formData.set('avatar', file);
+          const updated = await api.updateProfile(formData);
+          currentAvatarUrl = updated.avatar
+            ? new URL(updated.avatar, window.location.origin).href
+            : '';
+          localStorage.setItem('user', JSON.stringify(updated));
+          window.dispatchEvent(new Event('jupython:auth-changed'));
+          avatarInput.value = '';
+          avatarImage.src = currentAvatarUrl;
+          updateAvatarAction();
+          updatePublicPreview();
+          avatarFeedback.textContent = 'Photo de profil mise à jour.';
+        } catch (error) {
+          avatarInput.value = '';
+          avatarFeedback.textContent = error.data?.avatar?.[0]
+            || error.message
+            || 'Impossible d’enregistrer la photo. Réessaie.';
+          avatarFeedback.classList.add('text-red-300');
+          if (currentAvatarUrl) {
+            avatarImage.src = currentAvatarUrl;
+            avatarImage.classList.remove('hidden');
+            avatarPlaceholder.classList.add('hidden');
+          } else {
+            avatarImage.removeAttribute('src');
+            avatarImage.classList.add('hidden');
+            avatarPlaceholder.classList.remove('hidden');
+          }
+          updateAvatarAction();
+          updatePublicPreview();
+        } finally {
+          if (pendingAvatarPreviewUrl) URL.revokeObjectURL(pendingAvatarPreviewUrl);
+          pendingAvatarPreviewUrl = '';
+          avatarButton.disabled = false;
+        }
+      });
+
+      cancelButton.addEventListener('click', () => window.location.reload());
+
+      editButton.addEventListener('click', async () => {
+        if (editButton.dataset.editing !== 'true') {
+          setEditing(true);
+          return;
+        }
+
+        const names = fullnameInput.value.trim().split(/\s+/, 2);
+        const formData = new FormData();
+        formData.set('first_name', names[0] || '');
+        formData.set('last_name', names[1] || '');
+        formData.set('email', emailInput.value.trim());
+        formData.set('university', universityInput.value.trim());
+        formData.set('promotion', promotionInput.value.trim());
+        formData.set('public_name', publicNameInput.value.trim());
+        formData.set('bio', bioInput.value.trim());
+        editButton.disabled = true;
+        try {
+          const updated = await api.updateProfile(formData);
+          localStorage.setItem('user', JSON.stringify(updated));
+          window.dispatchEvent(new Event('jupython:auth-changed'));
+          const updatedFullName = [updated.first_name, updated.last_name].filter(Boolean).join(' ') || updated.username;
+          accountHasName = Boolean(updated.first_name || updated.last_name);
+          fullnameInput.value = updatedFullName;
+          emailInput.value = updated.email || '';
+          universityInput.value = updated.university || '';
+          promotionInput.value = updated.promotion || '';
+          publicNameInput.value = updated.public_name || '';
+          bioInput.value = updated.bio || '';
+          document.querySelector('[data-profile-name]').textContent = updatedFullName;
+          if (updated.avatar) {
+            currentAvatarUrl = new URL(updated.avatar, window.location.origin).href;
+            avatarImage.src = currentAvatarUrl;
+            avatarImage.classList.remove('hidden');
+            avatarPlaceholder.classList.add('hidden');
+          } else {
+            currentAvatarUrl = '';
+            avatarImage.removeAttribute('src');
+            avatarImage.classList.add('hidden');
+            avatarPlaceholder.classList.remove('hidden');
+          }
+          updateAvatarAction();
+          updatePublicPreview();
+          setEditing(false);
+        } catch (error) {
+          const details = error.data ? Object.values(error.data).flat().join(' ') : '';
+          alert(details || error.message || 'Impossible de mettre à jour le profil.');
+        } finally {
+          editButton.disabled = false;
+        }
+      });
+      } catch (error) {
+        console.error('Impossible de charger les données du profil:', error);
+        main.hidden = false;
+        const panel = document.createElement('div');
+        panel.className = 'jp-academy-panel p-6';
+        panel.setAttribute('role', 'alert');
+        const message = document.createElement('p');
+        message.className = 'text-gray-200';
+        message.textContent = 'Impossible de charger ton profil ou tes données. Vérifie ta connexion puis réessaie.';
+        const link = document.createElement('a');
+        link.href = 'login.html';
+        link.className = 'inline-block mt-4 text-orange-300 font-semibold underline';
+        link.textContent = 'Retour à la connexion';
+        panel.append(message, link);
+        main.replaceChildren(panel);
+      }
+    });
+  </script>
 </body>
 </html>

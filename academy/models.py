@@ -1,8 +1,26 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.utils.deconstruct import deconstructible
 
 # Utiliser le modèle utilisateur configuré (sous forme de chaîne via settings.AUTH_USER_MODEL).
 User = settings.AUTH_USER_MODEL
+
+
+@deconstructible
+class PrivateCertificateStorage(FileSystemStorage):
+    def __init__(self, location=None):
+        super().__init__(location=location or settings.PRIVATE_CERTIFICATES_ROOT)
+
+
+certificate_storage = PrivateCertificateStorage()
+
+
+def certificate_upload_path(instance, filename):
+    extension = filename.rsplit('.', 1)[-1].lower() if '.' in filename else 'bin'
+    return f'certificates/{uuid.uuid4().hex}.{extension}'
 
 
 class Academy(models.Model):
@@ -32,6 +50,19 @@ class Formation(models.Model):
     skills = models.JSONField(default=list, blank=True)
     credential_info = models.TextField(blank=True)
     hosted_by_jupython = models.BooleanField(default=False)
+    cover_image = models.ImageField(
+        upload_to='academy/course-covers/',
+        blank=True,
+        help_text='Visuel cr?? ou fourni par Jupython, pour les cours internes.',
+    )
+    cover_image_url = models.URLField(
+        blank=True,
+        help_text='URL HTTPS du visuel officiel du cours externe, provenant du site fournisseur.',
+    )
+    provider_logo_url = models.URLField(
+        blank=True,
+        help_text='URL HTTPS du logo officiel du fournisseur externe.',
+    )
     last_verified_at = models.DateTimeField(null=True, blank=True)
     prerequisites = models.TextField(blank=True)
     project_outcome = models.TextField(blank=True)
@@ -144,12 +175,52 @@ class LessonProgress(models.Model):
         return f'{self.user} — {self.lesson}'
 
 
+class LessonPracticeSubmission(models.Model):
+    STATUS_PENDING = 'pending'
+    STATUS_REVISION = 'revision'
+    STATUS_APPROVED = 'approved'
+    STATUS_CHOICES = [
+        (STATUS_PENDING, '? corriger'),
+        (STATUS_REVISION, '? refaire'),
+        (STATUS_APPROVED, 'Valid?e'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lesson_practice_submissions')
+    lesson = models.ForeignKey(CourseLesson, on_delete=models.CASCADE, related_name='practice_submissions')
+    response = models.TextField(verbose_name='R?ponse ou lien vers le travail')
+    status = models.CharField(max_length=12, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    feedback = models.TextField(blank=True, verbose_name='Retour au participant')
+    submitted_at = models.DateTimeField(auto_now=True)
+    reviewed_at = models.DateTimeField(null=True, blank=True)
+    reviewer = models.ForeignKey(
+        User, null=True, blank=True, on_delete=models.SET_NULL, related_name='reviewed_practice_submissions'
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'lesson'], name='unique_user_lesson_practice_submission')
+        ]
+        ordering = ['status', 'submitted_at']
+        verbose_name = 'Remise de pratique'
+        verbose_name_plural = 'Remises de pratique'
+
+    def __str__(self):
+        return f'{self.user} ? {self.lesson} ({self.get_status_display()})'
+
+
 class Certificate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
     certificate_url = models.URLField(
+        blank=True,
         verbose_name='Lien du justificatif (URL HTTPS)',
         help_text='Lien HTTPS vers un justificatif émis par le fournisseur de la formation.',
+    )
+    certificate_file = models.FileField(
+        storage=certificate_storage,
+        upload_to=certificate_upload_path,
+        blank=True,
+        verbose_name='Fichier du justificatif',
     )
     verified = models.BooleanField(
         verbose_name='Justificatif examiné par Jupython',

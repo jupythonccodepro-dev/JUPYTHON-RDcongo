@@ -2,25 +2,26 @@
 <!-- Cette page présente la plateforme Jupython avec sa mission, classements, et actualités -->
 <!doctype html>
 <html lang="fr">
-<!-- Section head : métadonnées et ressources externes -->
+<!-- En-tête de la page : métadonnées et ressources externes -->
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Jupython - Plateforme de certifications IT en Afrique. Accédez à des formations reconnaissables de Cisco, Microsoft, AWS et plus encore.">
+  <meta name="description" content="Jupython - Parcours numériques, cours de fournisseurs externes et suivi de progression pour développer vos compétences IT en Afrique.">
   <meta name="keywords" content="certification IT, formations en ligne, Afrique, Cisco, Microsoft, AWS, apprentissage numérique">
   <meta name="author" content="Jupython">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Jupython - L'intelligence numérique au service de l'Afrique">
-  <meta property="og:description" content="Obtenez vos certifications IT reconnues mondialement avec Jupython">
+  <meta property="og:description" content="Apprenez, pratiquez et suivez votre progression avec les parcours Jupython et les cours proposés par des fournisseurs externes.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jupython.cd">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Jupython - Certifications IT en Afrique">
+  <meta name="twitter:title" content="Jupython - Parcours numériques en Afrique">
   <link rel="canonical" href="https://jupython.cd/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <title>Jupython - L'intelligence numérique au service de l'Afrique</title>
   <!-- Chargement du framework CSS Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=sitewide-experience-3">
   <!-- Styles personnalisés pour améliorer l'expérience utilisateur -->
   <style>
     /* Optionnel : ajout d'une transition douce pour le défilement */
@@ -29,72 +30,70 @@
 </head>
 <body class="bg-gray-950 text-white font-sans">
 
-  <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-xl border-b border-gray-800">
-    <!-- Conteneur principal de l'en-tête -->
+  <header class="jp-site-header">
+    <!-- Conteneur principal de l’en-tête -->
     <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-6">
       <!-- Logo et nom de la plateforme -->
-      <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-tr from-orange-400 to-orange-600 text-black font-bold rounded-lg w-10 h-10 flex items-center justify-center text-xl shadow-lg shadow-orange-500/20">J</div>
+      <a href="index.html" class="flex items-center gap-3 no-underline">
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain shadow-lg shadow-orange-500/20">
         <span class="text-white font-extrabold text-xl tracking-tight">Jupython</span>
-      </div>
+      </a>
       <!-- Navigation principale (cachée sur mobile) -->
       <nav class="hidden md:flex gap-6 items-center">
         <a href="index.html" class="text-orange-500 font-semibold transition">Accueil</a>
         <a href="about.html" class="text-gray-400 hover:text-orange-400 transition">À propos</a>
         <a href="projects.html" class="text-gray-400 hover:text-orange-400 transition">Projets</a>
-        <a href="academy/login.html" class="text-gray-400 hover:text-orange-400 transition">Academy</a>
+        <a href="services.html" class="text-gray-400 hover:text-orange-400 transition">Nos services</a>
+        <a href="academy/login.html" data-role="guest" class="text-gray-400 hover:text-orange-400 transition">Academy</a>
+        <a href="academy/dashboard.html" data-role="auth" class="text-gray-400 hover:text-orange-400 transition">Mon espace</a>
         <a href="rankings.html" class="text-gray-400 hover:text-orange-400 transition">Classements</a>
         <a href="contact.html" class="text-gray-400 hover:text-orange-400 transition">Contact</a>
       </nav>
       <!-- Bouton de connexion -->
-      <a href="academy/login.html" class="bg-orange-500 text-white px-6 py-2 rounded-lg font-bold shadow-lg hover:bg-orange-600 hover:-translate-y-0.5 transition-all">Connecter</a>
+      <a href="academy/login.html" data-role="guest" class="jp-button-primary">Se connecter</a>
+      <a href="academy/profile.html" data-role="auth" class="jp-button-primary">Mon profil</a>
     </div>
   </header>
 
   <!-- Contenu principal de la page -->
   <main>
-    <!-- Section hero : présentation principale de Jupython -->
-    <section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-20 pb-16 px-6">
-
-      <!-- Arrière-plan avec image et overlay -->
-      <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-gray-950/70 z-10"></div>
-
-        <img src="images/hero-bg.png"
-             alt="Background Jupython"
-             class="w-full h-full object-cover object-center transition-opacity duration-500"
-             onerror="this.style.display='none'"> </div>
-
-      <!-- Contenu texte principal -->
-      <div class="relative z-20 max-w-5xl mx-auto text-center">
-        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight tracking-tight text-white">
-          L'intelligence numérique <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
-            au service de l'Afrique
-          </span>
-        </h1>
-        <p class="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
-          Rejoignez la première plateforme dédiée aux certifications IT et à l'excellence technologique en RDC.
-        </p>
-        <!-- Boutons d'action principaux -->
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#" class="bg-orange-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-all shadow-xl shadow-orange-500/40">
-            Commencer maintenant
-          </a>
-          <a href="#articles" class="bg-gray-900/50 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all border border-gray-700">
-            Voir les actualités
-          </a>
+    <!-- Bannière principale : présentation de Jupython -->
+    <section class="jp-hero">
+      <div class="jp-hero__inner">
+        <div class="jp-hero__copy">
+          <div class="jp-hero__eyebrow">L’académie numérique de la RDC</div>
+          <h1>Construis les compétences qui <span>ouvrent des portes.</span></h1>
+          <p>Progresse dans les réseaux, le cloud, la cybersécurité et la programmation grâce aux parcours Jupython et aux cours de fournisseurs externes.</p>
+          <div class="jp-hero__actions">
+            <a href="/academy/register.html" class="jp-button-primary">Rejoindre l’Academy <span aria-hidden="true">→</span></a>
+            <a href="courses.html" class="jp-button-secondary">Explorer les formations</a>
+          </div>
+          <p class="mt-6 text-sm text-gray-400">Un espace pour apprendre, pratiquer et faire évoluer ta carrière numérique.</p>
+        </div>
+        <div class="jp-hero__visual" aria-label="Espace de travail et de formation informatique">
+          <div class="jp-hero__floating-card">
+            <span>Ton parcours commence ici</span>
+            <strong>Apprendre. Pratiquer. Évoluer.</strong>
+          </div>
+          <div class="jp-hero__image-frame">
+            <img src="/images/learning-lab.webp" alt="Espace de travail informatique consacré au code et aux réseaux" fetchpriority="high">
+            <div class="jp-hero__image-caption">
+              <strong>Des compétences pour le monde connecté</strong>
+              <span>Réseaux · Cloud · Cybersécurité · Développement</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
      
-    <section class="bg-white py-12 border-y border-gray-200">
+    <section class="jp-partner-section py-12 border-y">
   <div class="max-w-6xl mx-auto px-6">
     <h2 class="text-gray-900 text-center text-xl font-bold mb-8 uppercase tracking-widest">
-      Certifications reconnues
+      Exemples de plateformes et d’organismes externes
     </h2>
+    <p class="text-gray-600 text-center max-w-3xl mx-auto mb-8">Ces logos identifient des fournisseurs de cours référencés ; ils ne signifient pas que Jupython est partenaire ou accrédité par ces organismes.</p>
     
-    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-70 grayscale hover:grayscale-0 transition-all duration-700">
+    <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" alt="Cisco" class="h-10 md:h-14">
       
       <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" class="h-8 md:h-10">
@@ -105,102 +104,57 @@
       
       <img src="https://www.vectorlogo.zone/logos/coursera/coursera-ar21.svg" alt="Coursera" class="h-8 md:h-10">
       
-      <div class="text-gray-900 font-black text-xl italic tracking-tighter">OpenClassrooms</div>
+      <div class="text-white font-black text-xl italic tracking-tighter">OpenClassrooms</div>
     </div>
   </div>
     </section>
 
-    <section class="bg-white py-24 border-y border-gray-100">
+    <section class="jp-community-section py-24 border-y">
       <div class="max-w-5xl mx-auto px-6">
         
         <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
           <div class="max-w-2xl">
             <div class="flex items-center gap-2 text-orange-600 font-bold uppercase tracking-widest text-sm mb-2">
               <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-ping"></span>
-              Classement en temps réel
+              Communauté Jupython
             </div>
-            <h2 class="text-3xl md:text-5xl font-black text-gray-900">Tableau d'Excellence</h2>
+            <h2 class="text-3xl md:text-5xl font-black text-gray-900">Les membres</h2>
             <p class="text-gray-600 mt-4 text-lg">
-              Les 10 étudiants les plus certifiés de la communauté Jupython. Le classement est mis à jour dynamiquement.
+              Consulte uniquement les photos, noms et biographies que les membres ont choisi de rendre publics.
             </p>
           </div>
           <a href="rankings.html" class="text-orange-600 hover:text-orange-700 font-bold border-b-2 border-orange-500/30 pb-1 transition">
-            Voir le classement complet →
+            Découvrir la communauté →
           </a>
         </div>
 
-        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-2xl shadow-gray-200/50">
+        <div class="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
           <table class="w-full text-left border-collapse">
             <thead class="bg-gray-50/80">
               <tr>
-                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider">Rang</th>
-                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider">Étudiant</th>
-                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider">Université / Ville</th>
-                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider text-right">Certificats</th>
+                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider">Membre</th>
+                <th class="px-6 py-5 text-gray-500 font-bold uppercase text-xs tracking-wider">Biographie</th>
+                <th></th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-              
-              <tr class="hover:bg-orange-50/50 transition-colors group">
-                <td class="px-6 py-6">
-                  <div class="flex items-center justify-center w-10 h-10 rounded-full bg-orange-500 text-white font-black shadow-lg shadow-orange-500/30">1</div>
-                </td>
-                <td class="px-6 py-6">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center font-bold text-orange-600">BD</div>
-                    <span class="font-bold text-gray-900 group-hover:text-orange-600 transition">Benit Diyavanga</span>
-                  </div>
-                </td>
-                <td class="px-6 py-6 text-gray-500 italic">UPN - Kinshasa</td>
-                <td class="px-6 py-6 text-right font-black text-2xl text-gray-900">14</td>
-              </tr>
-
-              <tr class="hover:bg-gray-50 transition-colors group">
-                <td class="px-6 py-6 text-center">
-                  <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-700 font-black">2</div>
-                </td>
-                <td class="px-6 py-6">
-                  <div class="flex items-center gap-3 text-gray-700">
-                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold">MV</div>
-                    <span class="font-bold text-gray-900">Mavinga Mavinga</span>
-                  </div>
-                </td>
-                <td class="px-6 py-6 text-gray-500">UPN - Kinshasa</td>
-                <td class="px-6 py-6 text-right font-bold text-xl text-gray-700">11</td>
-              </tr>
-
-              <tr class="hover:bg-gray-50 transition-colors group">
-                <td class="px-6 py-6 text-center">
-                  <div class="flex items-center justify-center w-10 h-10 rounded-full bg-amber-100 text-amber-700 font-black">3</div>
-                </td>
-                <td class="px-6 py-6 text-gray-700">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold">JM</div>
-                    <span class="font-bold text-gray-900">Jean Mukendi</span>
-                  </div>
-                </td>
-                <td class="px-6 py-6 text-gray-500">ISTA - Gombe</td>
-                <td class="px-6 py-6 text-right font-bold text-xl text-gray-700">09</td>
-              </tr>
-
-            </tbody>
+            <tbody data-member-directory="light" data-limit="3" class="divide-y divide-gray-100"></tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <section class="max-w-6xl mx-auto py-24 px-6">
+    <section class="jp-home-section max-w-6xl mx-auto px-6">
           <div class="text-center mb-16">
             <h2 class="text-3xl md:text-5xl font-black text-white mb-4">Pourquoi Jupython ?</h2>
             <p class="text-gray-400 max-w-2xl mx-auto text-lg">
-              Une méthode éprouvée pour transformer votre passion en expertise reconnue sur le marché international.
+              Des parcours pour apprendre, pratiquer et suivre tes progrès, avec des cours externes clairement attribués à leurs fournisseurs.
             </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:border-orange-500/50 transition-all group shadow-xl">
-              <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                <span class="text-3xl">🚀</span>
+            <div class="jp-feature-card p-8 group">
+              <div class="mb-6">
+                <span class="jp-feature-card__label">Parcours guidés</span>
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Compétences</h3>
               <p class="text-gray-400 leading-relaxed">
@@ -208,19 +162,19 @@
               </p>
             </div>
 
-            <div class="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:border-orange-500/50 transition-all group shadow-xl">
-              <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                <span class="text-3xl">🏆</span>
+            <div class="jp-feature-card p-8 group">
+              <div class="mb-6">
+                <span class="jp-feature-card__label">Certifications</span>
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Valorisation</h3>
               <p class="text-gray-400 leading-relaxed">
-                Obtenez des badges et des certificats qui prouvent votre expertise auprès des recruteurs en RDC et à l'international.
+                Les badges et certificats éventuels sont délivrés par les organismes qui proposent les cours. Jupython suit les parcours hébergés sur la plateforme, mais ne délivre pas de certification professionnelle.
               </p>
             </div>
 
-            <div class="bg-gray-900 border border-gray-800 p-8 rounded-3xl hover:border-orange-500/50 transition-all group shadow-xl">
-              <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition">
-                <span class="text-3xl">💎</span>
+            <div class="jp-feature-card p-8 group">
+              <div class="mb-6">
+                <span class="jp-feature-card__label">Mise en pratique</span>
               </div>
               <h3 class="text-xl font-bold text-white mb-4">Niveau Pro</h3>
               <p class="text-gray-400 leading-relaxed">
@@ -231,7 +185,7 @@
     </section>
 
   
-    <section id="articles" class="max-w-6xl mx-auto py-20 px-6">
+    <section id="articles" class="jp-home-section max-w-6xl mx-auto px-6">
       <div class="mb-12 text-center md:text-left">
         <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">Actualités & Conseils Tech</h2>
         <div class="h-1.5 w-20 bg-orange-500 rounded-full mx-auto md:mx-0"></div>
@@ -239,7 +193,9 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-6 flex flex-col hover:border-orange-500/50 transition-all group">
+        <article class="jp-news-card flex flex-col hover:border-orange-500/50 transition-all group">
+          <img src="/images/technology-lab.webp" alt="Laboratoire numérique et infrastructures informatiques" loading="lazy">
+          <div class="p-6 flex flex-col flex-1">
           <div class="text-xs font-bold text-orange-400 uppercase tracking-widest mb-3">Certification</div>
           <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition">Comment réussir vos certifications IT</h3>
           <p class="text-gray-400 flex-1 text-sm leading-relaxed">Découvrez les meilleures stratégies pour obtenir vos certifications professionnelles et booster votre carrière.</p>
@@ -247,9 +203,12 @@
             <span class="text-xs text-gray-500">Dr Kasongo Muteba</span>
             <a href="article-certifications.html" class="text-orange-500 font-bold text-sm hover:underline">Lire plus →</a>
           </div>
+          </div>
         </article>
 
-        <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-6 flex flex-col hover:border-orange-500/50 transition-all group">
+        <article class="jp-news-card flex flex-col hover:border-orange-500/50 transition-all group">
+          <img src="/images/digital-network.webp" alt="Réseau numérique lumineux" loading="lazy">
+          <div class="p-6 flex flex-col flex-1">
           <div class="text-xs font-bold text-orange-400 uppercase tracking-widest mb-3">Impact</div>
           <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition">L'importance des certifications pour l'Afrique</h3>
           <p class="text-gray-400 flex-1 text-sm leading-relaxed">Les certifications professionnelles peuvent transformer l'avenir de la jeunesse africaine dans le secteur technologique.</p>
@@ -257,15 +216,19 @@
             <span class="text-xs text-gray-500">Marie Kalala</span>
             <a href="article-afrique.html" class="text-orange-500 font-bold text-sm hover:underline">Lire plus →</a>
           </div>
+          </div>
         </article>
 
-        <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl p-6 flex flex-col hover:border-orange-500/50 transition-all group">
+        <article class="jp-news-card flex flex-col hover:border-orange-500/50 transition-all group">
+          <img src="/images/learning-lab.webp" alt="Postes de travail dédiés aux technologies" loading="lazy">
+          <div class="p-6 flex flex-col flex-1">
           <div class="text-xs font-bold text-orange-400 uppercase tracking-widest mb-3">Ressources</div>
           <h3 class="text-xl font-bold text-white mb-3 group-hover:text-orange-400 transition">Top 5 plateformes gratuites</h3>
-          <p class="text-gray-400 flex-1 text-sm leading-relaxed">Découvrez les meilleures plateformes où vous pouvez obtenir des certifications reconnues gratuitement.</p>
+          <p class="text-gray-400 flex-1 text-sm leading-relaxed">Découvrez des plateformes de cours externes ; leurs éventuels badges ou certificats dépendent de chaque organisme et de ses conditions.</p>
           <div class="mt-6 flex items-center justify-between border-t border-gray-800 pt-4">
             <span class="text-xs text-gray-500">Jean Mukendi</span>
             <a href="article-plateformes.html" class="text-orange-500 font-bold text-sm hover:underline">Lire plus →</a>
+          </div>
           </div>
         </article>
       </div>
@@ -276,7 +239,7 @@
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 px-6">
       <div class="col-span-1 md:col-span-1">
         <div class="flex items-center gap-3 mb-6">
-          <div class="bg-orange-500 text-black font-bold rounded-lg w-8 h-8 flex items-center justify-center">J</div>
+          <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-10 h-10 rounded object-contain">
           <span class="text-white font-extrabold text-lg">Jupython</span>
         </div>
         <p class="text-gray-400 text-sm leading-relaxed">
@@ -287,30 +250,31 @@
       <div>
         <h4 class="text-white font-bold mb-6">À propos</h4>
         <ul class="text-gray-400 space-y-3 text-sm">
-          <li><a href="#" class="hover:text-orange-400 transition">Jupython RDC</a></li>
-          <li><a href="#" class="hover:text-orange-400 transition">Projet éducatif</a></li>
-          <li><a href="#" class="hover:text-orange-400 transition">Fabriqué en Afrique</a></li>
+          <li><a href="about.html" class="hover:text-orange-400 transition">Jupython RDC</a></li>
+          <li><a href="about.html" class="hover:text-orange-400 transition">Projet éducatif</a></li>
+          <li><a href="about.html" class="hover:text-orange-400 transition">Fabriqué en Afrique</a></li>
+          <li><a href="services.html" class="hover:text-orange-400 transition">Nos services</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="text-white font-bold mb-6">Ressources</h4>
         <ul class="text-gray-400 space-y-3 text-sm">
-          <li><a href="#" class="hover:text-orange-400 transition">Blog</a></li>
-          <li><a href="#" class="hover:text-orange-400 transition">Classes</a></li>
-          <li><a href="#" class="hover:text-orange-400 transition">Certifications</a></li>
+          <li><a href="index.html#articles" class="hover:text-orange-400 transition">Blog</a></li>
+          <li><a href="courses.html" class="hover:text-orange-400 transition">Classes</a></li>
+          <li><a href="article-certifications.html" class="hover:text-orange-400 transition">Certifications</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="text-white font-bold mb-6">Contact</h4>
         <ul class="text-gray-400 space-y-3 text-sm">
-          <li class="flex items-center gap-2"><span>📧</span> contact@jupython.cd</li>
-          <li class="flex items-center gap-2"><span>📍</span> Kinshasa - UPN</li>
-          <li class="flex gap-4 mt-4 text-xl">
-            <a href="#" class="hover:text-orange-500 transition">f</a>
-            <a href="#" class="hover:text-orange-500 transition">t</a>
-            <a href="#" class="hover:text-orange-500 transition">y</a>
+          <li><a href="mailto:jupythonccodepro@gmail.com" class="hover:text-orange-400">jupythonccodepro@gmail.com</a></li>
+          <li>Kinshasa - UPN</li>
+          <li class="flex flex-wrap gap-x-3 gap-y-1 mt-4 text-sm">
+            <a href="https://www.facebook.com/profile.php?id=61576881328988" target="_blank" rel="noopener noreferrer" aria-label="Jupython sur Facebook" class="hover:text-orange-500 transition">Facebook</a>
+            <a href="https://www.instagram.com/jupython.b/" target="_blank" rel="noopener noreferrer" aria-label="Jupython sur Instagram" class="hover:text-orange-500 transition">Instagram</a>
+            <a href="https://www.youtube.com/channel/UCHZtvmx8U96DPkrdOHUdKFg" target="_blank" rel="noopener noreferrer" aria-label="Jupython sur YouTube" class="hover:text-orange-500 transition">YouTube</a>
           </li>
         </ul>
       </div>
@@ -320,7 +284,10 @@
     </div>
   </footer>
 
+  <script src="assets/js/api.js?v=session-persistence-1"></script>
   <script src="assets/js/index.js"></script>
-  <script src="assets/js/mobile-menu.js"></script>
+  <script src="assets/js/rankings.js?v=profile-privacy-1"></script>
+  <script src="assets/js/mobile-menu.js?v=academy-design-1"></script>
+  <script src="assets/js/auth-ui.js?v=account-menu-3"></script>
 </body>
 </html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Suis des leçons pratiques et ta progression dans les cours Jupython.">
+  <title>Apprendre - Jupython Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=guided-practice-1">
+</head>
+<body class="bg-gray-950 text-white">
+  <header class="jp-academy-header sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto flex items-center justify-between py-4 px-6">
+      <a href="../index.html" class="flex items-center gap-3">
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain">
+        <span class="text-white font-extrabold text-lg tracking-wide">Jupython</span>
+      </a>
+      <nav class="flex gap-2 flex-wrap">
+        <a href="../courses.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Formations</a>
+        <a href="dashboard.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Mon espace</a>
+        <a href="profile.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Profil</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <div class="jp-page-hero p-8 md:p-10 mb-8">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-orange-300 mb-3">Parcours Jupython</p>
+      <h1 data-course-title class="text-3xl md:text-4xl font-black text-white mb-3">Chargement du cours…</h1>
+      <p data-course-description class="text-gray-300 leading-relaxed"></p>
+      <p data-course-level class="mt-4 text-sm font-semibold text-orange-200"></p>
+      <div data-course-prerequisites class="mt-4 rounded-xl border border-white/10 bg-black/20 p-4 text-sm text-gray-300"></div>
+      <div data-course-project class="mt-4 rounded-xl border border-orange-400/25 bg-orange-400/5 p-4 text-sm text-orange-100"></div>
+      <div class="mt-6">
+        <div class="flex justify-between gap-4 text-sm text-gray-300 mb-2">
+          <span>Ma progression</span>
+          <span data-course-progress-label>0 %</span>
+        </div>
+        <div class="h-2 rounded-full bg-gray-800" role="progressbar" aria-label="Progression du cours" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div data-course-progress-bar class="h-2 rounded-full bg-orange-400 transition-all" style="width:0%"></div>
+        </div>
+      </div>
+      <p data-learning-motivation class="mt-5 rounded-xl border border-orange-400/20 bg-orange-400/5 p-4 text-sm leading-relaxed text-orange-100"></p>
+      <div data-course-enrollment class="mt-5"></div>
+    </div>
+    <p data-course-feedback role="status" aria-live="polite" class="text-gray-300 mb-6"></p>
+    <nav data-course-journey aria-label="Étapes du parcours" class="mb-8"></nav>
+    <div data-course-modules class="space-y-8">
+      <p class="jp-academy-panel p-6 text-gray-300">Chargement des leçons…</p>
+    </div>
+  </main>
+
+  <script src="../assets/js/api.js?v=learning-journey-1"></script>
+  <script src="../assets/js/auth-ui.js?v=account-menu-3"></script>
+  <script src="../assets/js/learn-course.js?v=guided-practice-2"></script>
+  <script src="../assets/js/mobile-menu.js?v=academy-design-1"></script>
+</body>
+</html>

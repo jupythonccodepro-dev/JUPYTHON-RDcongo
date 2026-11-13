@@ -6,9 +6,9 @@
     --white: #F5F7FA;      /* Blanc cassé (texte clair, cartes) */
     --gray: #f2f2f2;
     --dark-gray: #222;
-    --orange: #FF8F00;     /* Accent / hover */
+    --orange: #FF8F00;     /* Accentuation au survol */
     --orange-dark: #e07f00;
-    --green: #00C853;      /* Primaire (CTA) */
+    --green: #00C853;      /* Couleur principale des actions */
     --text-light: #9AA0A6; /* Texte secondaire */
 }
 
@@ -31,7 +31,7 @@ body {
 /* ------------------------------
    NAVIGATION BAR
 ------------------------------ */
-/* Adaptation pour la structure existante: header, .header, .navbar */
+/* Adaptation à la structure existante : en-tête, .header et .navbar */
 .navbar, header, .header {
     width: 100%;
     padding: 18px 80px;
@@ -55,7 +55,7 @@ body {
     gap: 25px;
 }
 
-/* Adapter les liens de nav vers .nav-links également */
+/* Appliquer aussi les styles aux liens de navigation .nav-links */
 .navbar ul li a,
 .nav-links a {
     text-decoration: none;
@@ -140,7 +140,7 @@ form textarea:focus {
     outline: none;
 }
 
-/* bouton */
+/* Bouton */
 .btn {
     width: 100%;
     background-color: var(--orange);
@@ -218,4 +218,3 @@ footer a:hover, .footer a:hover {
         gap: 20px;
     }
 }
-

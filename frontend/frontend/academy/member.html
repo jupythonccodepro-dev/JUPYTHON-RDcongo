@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Profil public d’un membre de la communauté Jupython">
+  <title>Profil membre - Jupython Academy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=sitewide-experience-3">
+</head>
+<body class="bg-gray-950 text-white min-h-screen">
+  <header class="jp-academy-header">
+    <div class="max-w-4xl mx-auto flex items-center justify-between py-4 px-6">
+      <a href="../index.html" class="flex items-center gap-3 font-extrabold text-lg tracking-wide">
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain">
+        <span>Jupython</span>
+      </a>
+      <a href="../rankings.html" class="text-orange-400 hover:text-orange-300">Communauté</a>
+    </div>
+  </header>
+  <main class="max-w-3xl mx-auto py-12 px-4">
+    <a href="../rankings.html" class="inline-block text-gray-400 hover:text-orange-400 mb-8">← Retour à la communauté</a>
+    <section data-public-profile hidden class="jp-academy-panel p-8 sm:p-12 text-center">
+      <div class="mx-auto w-32 h-32 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 overflow-hidden flex items-center justify-center text-4xl font-bold">
+        <span data-member-initials></span>
+        <img data-member-avatar alt="Photo de profil" class="hidden w-full h-full object-cover">
+      </div>
+      <h1 data-member-name class="mt-6 text-3xl font-black"></h1>
+      <p data-member-bio class="mt-4 text-gray-300 whitespace-pre-wrap"></p>
+      <div class="mt-8 flex flex-wrap justify-center gap-8 text-center">
+        <div>
+          <strong data-follower-count class="block text-2xl font-black text-orange-400">0</strong>
+          <span class="text-sm text-gray-400">Abonnés</span>
+        </div>
+        <div>
+          <strong data-following-count class="block text-2xl font-black text-orange-400">0</strong>
+          <span class="text-sm text-gray-400">Abonnements</span>
+        </div>
+      </div>
+      <div class="mt-6">
+        <button data-follow-toggle hidden type="button" class="rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-600"></button>
+        <a data-follow-login hidden href="login.html" class="inline-block rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition hover:bg-orange-600">Connecte-toi pour suivre ce membre</a>
+        <p data-follow-status role="status" class="mt-3 text-sm text-gray-400"></p>
+      </div>
+      <p class="mt-8 text-sm text-gray-500">Ce membre a choisi de partager uniquement son nom, sa photo et sa biographie.</p>
+    </section>
+    <p data-profile-status role="status" class="text-center text-gray-300">Chargement du profil…</p>
+  </main>
+  <script src="../assets/js/api.js?v=user-follow-1"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const status = document.querySelector('[data-profile-status]');
+      const memberId = new URLSearchParams(window.location.search).get('id');
+      if (!memberId || !/^\d+$/.test(memberId)) {
+        status.textContent = 'Ce profil est introuvable.';
+        return;
+      }
+
+      try {
+        const profile = await api.getPublicProfile(memberId);
+        document.querySelector('[data-member-name]').textContent = profile.display_name;
+        document.querySelector('[data-member-bio]').textContent = profile.bio || 'Aucune biographie.';
+        document.querySelector('[data-follower-count]').textContent = profile.follower_count;
+        document.querySelector('[data-following-count]').textContent = profile.following_count;
+        document.querySelector('[data-member-initials]').textContent =
+          profile.display_name.split(/\s+/).map((part) => part[0]).join('').slice(0, 2).toUpperCase();
+        if (profile.avatar) {
+          const avatar = document.querySelector('[data-member-avatar]');
+          avatar.src = profile.avatar;
+          avatar.classList.remove('hidden');
+          document.querySelector('[data-member-initials]').classList.add('hidden');
+        }
+        const currentUser = api.getUser();
+        const followButton = document.querySelector('[data-follow-toggle]');
+        const followLogin = document.querySelector('[data-follow-login]');
+        if (!api.isAuthenticated()) {
+          followLogin.hidden = false;
+        } else if (!currentUser || String(currentUser.id) !== String(profile.id)) {
+          followButton.hidden = false;
+          followButton.textContent = profile.is_following ? 'Ne plus suivre' : 'Suivre';
+          followButton.setAttribute('aria-pressed', String(profile.is_following));
+          followButton.addEventListener('click', async () => {
+            followButton.disabled = true;
+            document.querySelector('[data-follow-status]').textContent = 'Mise à jour…';
+            try {
+              const result = profile.is_following
+                ? await api.unfollowUser(memberId)
+                : await api.followUser(memberId);
+              profile.is_following = result.is_following;
+              profile.follower_count = result.follower_count;
+              document.querySelector('[data-follower-count]').textContent = profile.follower_count;
+              followButton.textContent = profile.is_following ? 'Ne plus suivre' : 'Suivre';
+              followButton.setAttribute('aria-pressed', String(profile.is_following));
+              document.querySelector('[data-follow-status]').textContent = '';
+            } catch (error) {
+              document.querySelector('[data-follow-status]').textContent =
+                error.data?.detail || 'Impossible de mettre à jour le suivi. Réessaie.';
+            } finally {
+              followButton.disabled = false;
+            }
+          });
+        }
+        document.querySelector('[data-public-profile]').hidden = false;
+        status.hidden = true;
+      } catch (error) {
+        status.textContent = error.data?.detail || 'Ce profil est introuvable.';
+      }
+    });
+  </script>
+</body>
+</html>

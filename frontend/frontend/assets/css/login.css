@@ -1,5 +1,5 @@
 /* ------------------- */
-/* RESET DE BASE       */
+/* REMISE À ZÉRO DE BASE */
 /* ------------------- */
 * {
     margin: 0;
@@ -26,7 +26,7 @@ body::before {
 }
 
 /* ------------------- */
-/* NAVBAR              */
+/* EN-TÊTE DE NAVIGATION */
 /* ------------------- */
 header, .header {
     width: 100%;
@@ -59,7 +59,7 @@ header .btn-connect {
 }
 
 /* ------------------- */
-/* CONTAINER PRINCIPAL */
+/* CONTENEUR PRINCIPAL */
 /* ------------------- */
 .login-wrapper {
     width: 100%;
@@ -180,7 +180,7 @@ header .btn-connect {
 }
 
 /* ------------------- */
-/* FOOTER              */
+/* PIED DE PAGE        */
 /* ------------------- */
 footer, .footer {
     background: #000;
@@ -207,4 +207,3 @@ footer a {
 footer a:hover {
     color: #fff;
 }
-

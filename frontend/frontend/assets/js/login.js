@@ -1,5 +1,5 @@
 /**
- * Jupython Login Page
+ * Page de connexion Jupython
  * Gère la connexion des utilisateurs
  */
 
@@ -9,7 +9,31 @@ class LoginPage {
     }
 
     init() {
+        this.preserveReturnPath();
         this.setupFormValidation();
+        this.setupGoogleLogin();
+    }
+
+    preserveReturnPath() {
+        const next = new URLSearchParams(window.location.search).get('next');
+        if (!next) return;
+        const accountLink = document.querySelector(`a[href="register.html"]`);
+        if (accountLink) accountLink.href = `register.html?next=${encodeURIComponent(next)}`;
+    }
+
+    getPostAuthDestination() {
+        const requested = new URLSearchParams(window.location.search).get('next');
+        if (!requested) return '/academy/dashboard.html';
+        try {
+            const destination = new URL(requested, window.location.origin);
+            const authPages = ['/academy/login.html', '/academy/register.html'];
+            if (destination.origin === window.location.origin && !authPages.includes(destination.pathname)) {
+                return `${destination.pathname}${destination.search}${destination.hash}`;
+            }
+        } catch (error) {
+            console.warn('Destination de retour ignor?e:', error);
+        }
+        return '/academy/dashboard.html';
     }
 
     /**
@@ -25,6 +49,43 @@ class LoginPage {
         loginForm.addEventListener('submit', (e) => this.handleLoginSubmit(e));
     }
 
+    setupGoogleLogin() {
+        const googleButton = document.getElementById('googleLoginBtn');
+        if (!googleButton) return;
+
+        window.setupGoogleAuthButton(
+            googleButton,
+            this.handleGoogleCredentialResponse.bind(this),
+        );
+    }
+
+    async handleGoogleCredentialResponse(response) {
+        try {
+            const result = await api.request('/accounts/google-login/', {
+                method: 'POST',
+                body: JSON.stringify({ id_token: response.credential }),
+            });
+
+            if (result && result.access) {
+                localStorage.setItem('access_token', result.access);
+                localStorage.setItem('refresh_token', result.refresh);
+                if (result.user) {
+                    localStorage.setItem('user', JSON.stringify(result.user));
+                }
+                api.token = result.access;
+                this.showSuccess(document.querySelector('form'), 'Connexion Google réussie.');
+                setTimeout(() => {
+                    window.location.href = this.getPostAuthDestination();
+                }, 1200);
+            } else {
+                throw new Error(result?.error || 'Connexion Google impossible');
+            }
+        } catch (error) {
+            console.error('Erreur connexion Google:', error);
+            this.showError(null, error?.message || 'Connexion Google impossible');
+        }
+    }
+
     /**
      * Gère la soumission du formulaire de connexion
      */
@@ -32,7 +93,7 @@ class LoginPage {
         e.preventDefault();
 
         const form = e.target;
-        const username = form.querySelector('input[name="username"]') || form.querySelector('input[type="email"]');
+        const username = form.querySelector('input[name="username"]') || form.querySelector('input[name="email"]') || form.querySelector('input[type="email"]');
         const password = form.querySelector('input[name="password"]') || form.querySelector('input[type="password"]');
         const submitButton = form.querySelector('button[type="submit"]');
 
@@ -56,22 +117,20 @@ class LoginPage {
             submitButton.disabled = true;
             submitButton.textContent = 'Connexion en cours...';
 
-            // ✅ Utilisation correcte de l'API client
             const result = await api.login(username.value, password.value);
 
             if (result && result.access) {
-                this.showSuccess(form, 'Connexion réussie! ✅');
+                this.showSuccess(form, 'Connexion réussie.');
                 setTimeout(() => {
-                    window.location.href = '../index.html';
-                }, 1500);
+                    window.location.href = this.getPostAuthDestination();
+                }, 1200);
             } else {
-                this.showError(form, 'Erreur de connexion');
-                submitButton.disabled = false;
-                submitButton.textContent = 'Se connecter';
+                throw new Error('Erreur de connexion');
             }
         } catch (error) {
             console.error('Erreur connexion:', error);
-            this.showError(form, 'Identifiants invalides ou erreur serveur');
+            const backendMessage = error?.data?.detail || error?.message || 'Identifiants invalides ou erreur serveur';
+            this.showError(form, backendMessage);
             submitButton.disabled = false;
             submitButton.textContent = 'Se connecter';
         }
@@ -87,7 +146,7 @@ class LoginPage {
         if (element) {
             const errorDiv = document.createElement('div');
             errorDiv.className = 'text-red-500 text-sm mt-1 error-message';
-            errorDiv.textContent = '❌ ' + message;
+            errorDiv.textContent = message;
             element.parentNode.insertBefore(errorDiv, element.nextSibling);
             element.classList.add('border-red-500');
         } else {

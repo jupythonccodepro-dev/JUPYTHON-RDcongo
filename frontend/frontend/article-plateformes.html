@@ -5,21 +5,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Top 5 plateformes gratuites - Jupython</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=sitewide-experience-3">
 </head>
 <body>
-  <header class="bg-gray-900 shadow">
+  <header class="jp-site-header">
     <div class="max-w-5xl mx-auto flex items-center justify-between py-4 px-6">
-      <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-tr from-orange-400 to-orange-600 text-black font-bold rounded-lg w-10 h-10 flex items-center justify-center text-xl">J</div>
+      <a href="index.html" class="flex items-center gap-3 no-underline">
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain">
         <span class="text-white font-extrabold text-lg tracking-wide">Jupython</span>
-      </div>
+      </a>
       <nav class="flex gap-2 flex-wrap">
         <a href="index.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Accueil</a>
         <a href="about.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">À propos</a>
         <a href="projects.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Projets</a>
+        <a href="services.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Nos services</a>
         <a href="rankings.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Classements</a>
         <a href="courses.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Formations</a>
         <a href="contact.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Contact</a>
+        <a href="academy/login.html" data-role="guest" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Academy</a>
+        <a href="academy/dashboard.html" data-role="auth" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Mon espace</a>
       </nav>
     </div>
   </header>
@@ -93,6 +97,9 @@
     </article>
   </main>
 
+  <script src="assets/js/api.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/auth-ui.js?v=account-menu-3"></script>
+  <script src="assets/js/mobile-menu.js?v=academy-design-1"></script>
 </body>
 </html>

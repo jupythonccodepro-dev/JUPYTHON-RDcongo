@@ -1,5 +1,5 @@
-// About page specific JavaScript
-// Basic interactivity for about page
+// JavaScript propre à la page À propos.
+// Interactions de base de la page À propos.
 
 class AboutPage {
     constructor() {
@@ -7,13 +7,13 @@ class AboutPage {
     }
 
     init() {
-        // Add any about page specific functionality here
+        // Ajouter ici les fonctionnalités propres à la page À propos.
         this.setupTimelineAnimation();
     }
 
-    // Setup timeline animation (if needed)
+    // Configurer l’animation de la chronologie, si nécessaire.
     setupTimelineAnimation() {
-        // Add fade-in animations for timeline items
+        // Ajouter une animation d’apparition progressive aux éléments de la chronologie.
         const timelineItems = document.querySelectorAll('.bg-gray-800.rounded-xl');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -33,7 +33,7 @@ class AboutPage {
     }
 }
 
-// Initialize when DOM is loaded
+// Initialiser lorsque le DOM est chargé.
 document.addEventListener('DOMContentLoaded', () => {
     new AboutPage();
 });

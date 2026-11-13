@@ -1,0 +1,38 @@
+{$DOMAIN} {
+    encode zstd gzip
+
+    handle_path /assets/* {
+        root * /srv/assets
+        file_server
+    }
+
+    handle_path /images/* {
+        root * /srv/frontend/images
+        file_server
+    }
+
+    handle /favicon.svg {
+        root * /srv/frontend
+        file_server
+    }
+
+    handle /robots.txt {
+        root * /srv/frontend
+        file_server
+    }
+
+    handle_path /media/* {
+        root * /srv/media
+        header X-Content-Type-Options nosniff
+        file_server
+    }
+
+    handle {
+        reverse_proxy app:8000
+    }
+
+    log {
+        output stdout
+        format console
+    }
+}

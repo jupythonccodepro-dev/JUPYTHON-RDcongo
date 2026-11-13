@@ -1,5 +1,5 @@
-// Index page specific JavaScript
-// Smooth scrolling and general functionality
+// JavaScript propre à la page d’accueil.
+// Défilement fluide et fonctionnalités générales.
 
 class IndexPage {
     constructor() {
@@ -10,24 +10,24 @@ class IndexPage {
         this.setupSmoothScrolling();
     }
 
-    // Smooth scrolling for anchor links
+    // Activer le défilement fluide pour les liens d’ancrage.
     setupSmoothScrolling() {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const selector = this.getAttribute('href');
+                if (!selector || selector === '#') return;
+
+                const target = document.querySelector(selector);
+                if (!target) return;
+
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     }
 }
 
-// Initialize when DOM is loaded
+// Initialiser lorsque le DOM est chargé.
 document.addEventListener('DOMContentLoaded', () => {
     new IndexPage();
 });

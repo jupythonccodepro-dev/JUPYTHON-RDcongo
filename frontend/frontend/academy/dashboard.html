@@ -7,121 +7,373 @@
   <meta name="keywords" content="tableau de bord, formations, progression, académie, IT">
   <title>Tableau de bord - Jupython Academy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/assets/css/brand.css?v=course-visuals-2">
 </head>
 <body class="bg-gray-950 text-white">
-  <header class="bg-gray-900 shadow sticky top-0 z-50">
+  <header class="jp-academy-header sticky top-0 z-50">
     <div class="max-w-5xl mx-auto flex items-center justify-between py-4 px-6">
       <div class="flex items-center gap-3">
-        <div class="bg-gradient-to-tr from-orange-400 to-orange-600 text-black font-bold rounded-lg w-10 h-10 flex items-center justify-center text-xl">J</div>
+        <img src="/images/logo%20jupython.png" alt="Logo Jupython" class="w-12 h-12 rounded-lg object-contain">
         <span class="text-white font-extrabold text-lg tracking-wide">Jupython</span>
       </div>
       <nav class="flex gap-2 flex-wrap">
         <a href="../index.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Accueil</a>
         <a href="dashboard.html" class="bg-orange-500 text-white px-3 py-2 rounded font-semibold shadow hover:bg-orange-600 transition">Tableau de bord</a>
         <a href="profile.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Profil</a>
-        <a href="login.html" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Déconnexion</a>
+        <a href="login.html" data-action="logout" class="text-gray-300 hover:text-orange-400 px-3 py-2 rounded transition">Déconnexion</a>
       </nav>
     </div>
   </header>
 
   <main class="bg-gray-950 min-h-screen py-12 px-4">
     <div class="max-w-6xl mx-auto">
-      <!-- Bienvenue -->
-      <div class="mb-12">
-        <h1 class="text-4xl font-black text-white mb-2">Bienvenue, Jean!</h1>
-        <p class="text-gray-400">Vous êtes classé <strong class="text-orange-400">#5</strong> avec <strong class="text-orange-400">2450 points</strong></p>
+      <div class="jp-page-hero mb-12 grid gap-8 p-8 md:grid-cols-[1.1fr_0.9fr] md:items-center md:p-10">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[0.18em] text-orange-300 mb-3">Mon espace d’apprentissage</p>
+          <h1 class="text-4xl font-black text-white mb-3" data-user-name>Bienvenue !</h1>
+          <p class="text-gray-300">Votre espace Academy est personnel et sécurisé.</p>
+          <a href="profile.html" class="jp-button-primary mt-6">Gérer mon profil</a>
+        </div>
+        <img src="/images/technology-lab.webp" alt="Espace de travail numérique" class="w-full h-48 md:h-56 rounded-2xl object-cover border border-white/10">
       </div>
 
       <!-- Statistiques principales -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <p class="text-gray-400 text-sm mb-2">Heures d'apprentissage</p>
-          <p class="text-3xl font-black text-orange-400">127h</p>
+        <div class="jp-academy-panel p-6">
+          <p class="text-gray-400 text-sm mb-2">Formations suivies</p>
+          <p class="text-3xl font-black text-orange-400" data-enrollment-count>—</p>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <p class="text-gray-400 text-sm mb-2">Formations complétées</p>
-          <p class="text-3xl font-black text-orange-400">15</p>
+        <div class="jp-academy-panel p-6">
+          <p class="text-gray-400 text-sm mb-2">Certificats externes déclarés</p>
+          <p class="text-3xl font-black text-orange-400" data-certificate-count>—</p>
+          <a href="profile.html#certificates" class="mt-3 inline-block text-sm font-semibold text-orange-300 hover:text-orange-200">Ajouter un certificat →</a>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <p class="text-gray-400 text-sm mb-2">Certifications obtenues</p>
-          <p class="text-3xl font-black text-orange-400">8</p>
+        <div class="jp-academy-panel p-6">
+          <p class="text-gray-400 text-sm mb-2">Justificatifs examinés par Jupython</p>
+          <p class="text-3xl font-black text-orange-400" data-verified-certificate-count>—</p>
         </div>
-        <div class="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <p class="text-gray-400 text-sm mb-2">Taux de réussite</p>
-          <p class="text-3xl font-black text-orange-400">92%</p>
+        <div class="jp-academy-panel p-6">
+          <p class="text-gray-400 text-sm mb-2">Compte</p>
+          <p class="text-3xl font-black text-orange-400">Actif</p>
         </div>
       </div>
 
       <!-- Formations en cours -->
-      <div class="bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-8 mb-12">
-        <h2 class="text-2xl font-bold text-white mb-6">Formations en cours</h2>
-        <div class="space-y-6">
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center text-xl flex-shrink-0">📚</div>
-            <div class="flex-1">
-              <h3 class="font-bold text-white mb-1">Cisco CCNP - Routing & Switching</h3>
-              <p class="text-gray-400 text-sm mb-3">Module 4 sur 6 • 65% complet</p>
-              <div class="w-full bg-gray-800 rounded-full h-2">
-                <div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
-              </div>
-            </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold whitespace-nowrap ml-4">Continuer →</button>
+      <div class="jp-academy-panel p-8 mb-12">
+        <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[0.18em] text-orange-300 mb-2">Mon apprentissage</p>
+            <h2 class="text-2xl font-bold text-white">Mes formations</h2>
           </div>
-
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center text-xl flex-shrink-0">☁️</div>
-            <div class="flex-1">
-              <h3 class="font-bold text-white mb-1">AWS Cloud Practitioner</h3>
-              <p class="text-gray-400 text-sm mb-3">Module 2 sur 5 • 40% complet</p>
-              <div class="w-full bg-gray-800 rounded-full h-2">
-                <div class="bg-orange-500 h-2 rounded-full" style="width: 40%"></div>
-              </div>
-            </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold whitespace-nowrap ml-4">Continuer →</button>
-          </div>
-
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center text-xl flex-shrink-0">🔐</div>
-            <div class="flex-1">
-              <h3 class="font-bold text-white mb-1">CompTIA Security+</h3>
-              <p class="text-gray-400 text-sm mb-3">Module 3 sur 5 • 55% complet</p>
-              <div class="w-full bg-gray-800 rounded-full h-2">
-                <div class="bg-orange-500 h-2 rounded-full" style="width: 55%"></div>
-              </div>
-            </div>
-            <button class="text-orange-400 hover:text-orange-500 font-bold whitespace-nowrap ml-4">Continuer →</button>
-          </div>
+          <a href="../courses.html" class="text-orange-300 hover:text-orange-200 font-semibold">Explorer les cours →</a>
+        </div>
+        <div data-dashboard-enrollments class="grid gap-4 md:grid-cols-2">
+          <p class="text-gray-400">Chargement des formations…</p>
         </div>
       </div>
 
       <!-- Recommandations -->
-      <div class="bg-gray-900 border border-gray-800 rounded-xl shadow-lg p-8">
+      <section class="jp-academy-panel p-6 md:p-8">
         <h2 class="text-2xl font-bold text-white mb-6">Formations recommandées</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-gray-800 rounded-lg p-6 hover:border-orange-500/50 border border-gray-700 transition cursor-pointer">
-            <div class="text-4xl mb-4">🌐</div>
-            <h3 class="font-bold text-white mb-2">Python pour Débutants</h3>
-            <p class="text-gray-400 text-sm mb-4">Apprenez les bases de Python avec des projets pratiques.</p>
-            <p class="text-orange-400 font-bold text-sm">→ S'inscrire</p>
-          </div>
-          <div class="bg-gray-800 rounded-lg p-6 hover:border-orange-500/50 border border-gray-700 transition cursor-pointer">
-            <div class="text-4xl mb-4">💾</div>
-            <h3 class="font-bold text-white mb-2">Gestion de Bases de Données</h3>
-            <p class="text-gray-400 text-sm mb-4">Maîtrisez SQL et les concepts de bases de données.</p>
-            <p class="text-orange-400 font-bold text-sm">→ S'inscrire</p>
-          </div>
-          <div class="bg-gray-800 rounded-lg p-6 hover:border-orange-500/50 border border-gray-700 transition cursor-pointer">
-            <div class="text-4xl mb-4">🚀</div>
-            <h3 class="font-bold text-white mb-2">DevOps Essentials</h3>
-            <p class="text-gray-400 text-sm mb-4">Introduction à Docker, Kubernetes et le CI/CD.</p>
-            <p class="text-orange-400 font-bold text-sm">→ S'inscrire</p>
-          </div>
+        <div data-dashboard-recommendations class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <p class="text-gray-400">Chargement des recommandations…</p>
         </div>
-      </div>
+      </section>
     </div>
   </main>
 
-  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/api.js?v=session-persistence-1"></script>
+  <script src="../assets/js/auth-ui.js?v=account-menu-3"></script>
   <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/mobile-menu.js?v=academy-design-1"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      if (!user) {
+        window.location.href = '/academy/login.html';
+        return;
+      }
+      document.querySelectorAll('[data-user-name]').forEach((el) => {
+        el.textContent = `Bienvenue, ${user.first_name || user.username || 'utilisateur'} !`;
+      });
+      try {
+        const profile = await api.getProfile();
+        if (profile) {
+          localStorage.setItem('user', JSON.stringify(profile));
+          document.querySelectorAll('[data-user-name]').forEach((el) => {
+            el.textContent = `Bienvenue, ${profile.first_name || profile.username || 'utilisateur'} !`;
+          });
+        }
+      } catch (error) {
+        console.warn('Impossible de charger le profil:', error);
+      }
+      const [enrollmentResult, certificateResult] = await Promise.allSettled([
+        api.getMyEnrollments(),
+        api.getMyCertificates(),
+      ]);
+      const enrollments = enrollmentResult.status === 'fulfilled' ? enrollmentResult.value : [];
+      const certificates = certificateResult.status === 'fulfilled' ? certificateResult.value : [];
+      const recommendationsList = document.querySelector('[data-dashboard-recommendations]');
+      const renderRecommendations = (allFormations) => {
+        recommendationsList.replaceChildren();
+        const formations = Array.isArray(allFormations) ? allFormations : (allFormations.results || []);
+        const enrolledIds = new Set(enrollments.map((item) => String(item.formation.id)));
+        const available = formations.filter((formation) => !enrolledIds.has(String(formation.id)));
+        const recommended = (available.length ? available : formations).slice(0, 3);
+        if (!recommended.length) {
+          const empty = document.createElement('p');
+          empty.className = 'text-gray-400';
+          empty.textContent = 'Aucune formation à recommander pour le moment.';
+          recommendationsList.appendChild(empty);
+          return;
+        }
+
+        recommended.forEach((formation) => {
+          const internal = Boolean(formation.hosted_by_jupython);
+          const sourceName = internal ? 'Jupython Academy' : (formation.platform || 'Partenaire');
+          const card = document.createElement('article');
+          card.className = 'jp-course-card flex flex-col p-4';
+          const visual = document.createElement('div');
+          visual.className = 'jp-course-card__visual';
+          visual.style.cssText = 'min-height:108px;margin:-1rem -1rem 0.9rem;';
+          const coverUrl = internal
+            ? (formation.cover_image || '/images/technology-lab.webp')
+            : (formation.cover_image_url || formation.cover_image || '');
+          if (coverUrl) {
+            const cover = document.createElement('img');
+            cover.className = 'jp-course-card__image';
+            cover.style.height = '108px';
+            cover.src = coverUrl;
+            cover.alt = `Visuel de ${formation.title}`;
+            cover.loading = 'lazy';
+            cover.addEventListener('error', () => {
+              cover.remove();
+              visual.classList.add('jp-course-card__visual--fallback');
+            }, { once: true });
+            visual.appendChild(cover);
+          } else {
+            visual.classList.add('jp-course-card__visual--fallback');
+          }
+          const source = document.createElement('div');
+          source.className = 'jp-course-card__source';
+          const logoUrl = internal ? '/images/logo%20jupython.png' : formation.provider_logo_url;
+          if (logoUrl) {
+            const logo = document.createElement('img');
+            logo.className = 'jp-course-card__source-logo';
+            logo.src = logoUrl;
+            logo.alt = '';
+            logo.loading = 'lazy';
+            logo.addEventListener('error', () => logo.remove(), { once: true });
+            source.appendChild(logo);
+          }
+          const sourceLabel = document.createElement('span');
+          sourceLabel.textContent = sourceName;
+          source.appendChild(sourceLabel);
+          visual.appendChild(source);
+
+          const category = document.createElement('div');
+          category.className = 'mb-2 text-xs font-bold uppercase tracking-widest text-orange-300';
+          category.textContent = formation.category || sourceName;
+          const title = document.createElement('h3');
+          title.className = 'font-bold text-white mb-2';
+          title.textContent = formation.title;
+          const description = document.createElement('p');
+          description.className = 'text-gray-400 text-sm mb-4 flex-1';
+          description.textContent = formation.description || 'Découvre cette formation et développe tes compétences.';
+          const link = document.createElement('a');
+          link.className = 'text-orange-300 hover:text-orange-200 font-bold text-sm';
+          link.href = internal ? `learn.html?formation=${encodeURIComponent(formation.id)}` : (formation.link || '../courses.html');
+          if (!internal && formation.link) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          }
+          link.textContent = internal ? 'Découvrir le parcours →' : 'Voir la formation →';
+          card.append(visual, category, title, description, link);
+          recommendationsList.appendChild(card);
+        });
+      };
+      try {
+        renderRecommendations(await api.getFormations());
+      } catch (error) {
+        recommendationsList.replaceChildren();
+        const message = document.createElement('p');
+        message.className = 'text-gray-400';
+        message.textContent = 'Les recommandations sont momentanément indisponibles.';
+        recommendationsList.appendChild(message);
+        console.warn('Impossible de charger les recommandations:', error);
+      }
+      document.querySelectorAll('[data-enrollment-count]').forEach((el) => {
+        el.textContent = enrollmentResult.status === 'fulfilled' ? enrollments.length : '?';
+      });
+      document.querySelectorAll('[data-certificate-count]').forEach((el) => {
+        el.textContent = certificateResult.status === 'fulfilled' ? certificates.length : '?';
+      });
+      document.querySelectorAll('[data-verified-certificate-count]').forEach((el) => {
+        el.textContent = certificateResult.status === 'fulfilled'
+          ? certificates.filter((certificate) => certificate.verified).length
+          : '?';
+      });
+
+      const enrollmentList = document.querySelector('[data-dashboard-enrollments]');
+      const renderEnrollments = () => {
+        enrollmentList.replaceChildren();
+        if (enrollmentResult.status === 'rejected') {
+          const errorState = document.createElement('div');
+          errorState.className = 'rounded-xl border border-dashed border-gray-700 p-6 md:col-span-2';
+          errorState.setAttribute('role', 'alert');
+          const message = document.createElement('p');
+          message.className = 'text-gray-300';
+          message.textContent = 'Impossible de charger tes formations. Vérifie ta connexion puis réessaie.';
+          const retry = document.createElement('button');
+          retry.type = 'button';
+          retry.className = 'inline-block mt-4 text-orange-300 hover:text-orange-200 font-semibold';
+          retry.textContent = 'Réessayer';
+          retry.addEventListener('click', () => window.location.reload());
+          errorState.append(message, retry);
+          enrollmentList.appendChild(errorState);
+          return;
+        }
+        if (enrollments.length === 0) {
+          const emptyState = document.createElement('div');
+          emptyState.className = 'rounded-xl border border-dashed border-gray-700 p-6 md:col-span-2';
+          const message = document.createElement('p');
+          message.className = 'text-gray-300';
+          message.textContent = 'Vous ne suivez encore aucune formation.';
+          const link = document.createElement('a');
+          link.href = '../courses.html';
+          link.className = 'inline-block mt-4 text-orange-300 hover:text-orange-200 font-semibold';
+          link.textContent = 'Découvrir les formations →';
+          emptyState.append(message, link);
+          enrollmentList.appendChild(emptyState);
+          return;
+        }
+
+        enrollments.forEach((enrollment) => {
+          const card = document.createElement('article');
+          card.className = 'jp-course-card flex flex-col p-5';
+
+          const visual = document.createElement('div');
+          visual.className = 'jp-course-card__visual';
+          visual.style.margin = '-1.25rem -1.25rem 1rem';
+          const formation = enrollment.formation;
+          const coverUrl = formation.hosted_by_jupython
+            ? (formation.cover_image || '/images/technology-lab.webp')
+            : formation.cover_image_url;
+          if (coverUrl) {
+            const cover = document.createElement('img');
+            cover.className = 'jp-course-card__image';
+            cover.alt = `Visuel du cours ${formation.title}`;
+            cover.loading = 'lazy';
+            cover.src = coverUrl;
+            cover.addEventListener('error', () => {
+              cover.remove();
+              visual.classList.add('jp-course-card__visual--fallback');
+            }, { once: true });
+            visual.appendChild(cover);
+          } else {
+            visual.classList.add('jp-course-card__visual--fallback');
+          }
+
+          const source = document.createElement('div');
+          source.className = 'jp-course-card__source';
+          const sourceName = formation.hosted_by_jupython ? 'Jupython Academy' : formation.platform;
+          const logoUrl = formation.hosted_by_jupython
+            ? '/images/logo%20jupython.png'
+            : formation.provider_logo_url;
+          if (logoUrl) {
+            const logo = document.createElement('img');
+            logo.className = 'jp-course-card__source-logo';
+            logo.src = logoUrl;
+            logo.alt = '';
+            logo.loading = 'lazy';
+            logo.addEventListener('error', () => logo.remove(), { once: true });
+            source.appendChild(logo);
+          } else {
+            const monogram = document.createElement('span');
+            monogram.className = 'jp-course-card__source-monogram';
+            monogram.setAttribute('aria-hidden', 'true');
+            monogram.textContent = sourceName.split(/\s+/).map((word) => word[0]).join('').slice(0, 2).toUpperCase();
+            source.appendChild(monogram);
+          }
+          const sourceLabel = document.createElement('span');
+          sourceLabel.textContent = sourceName;
+          source.appendChild(sourceLabel);
+          visual.appendChild(source);
+          card.appendChild(visual);
+
+          const platform = document.createElement('p');
+          platform.className = 'text-xs font-bold uppercase tracking-widest text-orange-300 mb-3';
+          platform.textContent = enrollment.formation.platform || 'Formation';
+          const title = document.createElement('h3');
+          title.className = 'text-lg font-bold text-white';
+          title.textContent = enrollment.formation.title;
+          const joined = document.createElement('p');
+          joined.className = 'text-sm text-gray-400 mt-2';
+          joined.textContent = `Inscription le ${new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' }).format(new Date(enrollment.date_joined))}`;
+          const status = document.createElement('p');
+          status.className = 'text-sm text-gray-300 mt-2';
+          const isInternalCourse = enrollment.progress?.has_curriculum;
+          const statusLabels = {
+            enrolled: 'Inscrit',
+            in_progress: 'En cours',
+            completed: isInternalCourse ? 'Parcours terminé' : 'Terminé — progression déclarée',
+          };
+          status.textContent = `État : ${statusLabels[enrollment.status] || statusLabels.enrolled}`;
+          const link = document.createElement('a');
+          link.href = isInternalCourse
+            ? `learn.html?formation=${encodeURIComponent(enrollment.formation.id)}`
+            : enrollment.formation.link;
+          if (!isInternalCourse) {
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+          }
+          link.className = 'inline-block mt-4 text-orange-300 hover:text-orange-200 font-semibold';
+          link.textContent = isInternalCourse ? 'Continuer les leçons →' : 'Continuer sur la plateforme →';
+          card.append(platform, title, joined, status, link);
+
+          if (isInternalCourse) {
+            const progress = document.createElement('p');
+            progress.className = 'text-sm text-gray-400 mt-3';
+            progress.textContent = `Leçons terminées : ${enrollment.progress.completed_lessons} / ${enrollment.progress.total_lessons} (${enrollment.progress.percent} %)`;
+            const progressTrack = document.createElement('div');
+            progressTrack.className = 'h-2 rounded-full bg-gray-700 mt-2';
+            const progressBar = document.createElement('div');
+            progressBar.className = 'h-2 rounded-full bg-orange-400';
+            progressBar.style.width = `${enrollment.progress.percent}%`;
+            progressTrack.appendChild(progressBar);
+            card.append(progress, progressTrack);
+          } else if (enrollment.status !== 'completed') {
+            const progressButton = document.createElement('button');
+            progressButton.type = 'button';
+            progressButton.dataset.enrollmentProgress = enrollment.id;
+            progressButton.dataset.nextStatus = enrollment.status === 'enrolled' ? 'in_progress' : 'completed';
+            progressButton.className = 'block mt-4 rounded-lg border border-gray-600 px-4 py-2 text-sm font-semibold text-white hover:border-orange-400';
+            progressButton.textContent = enrollment.status === 'enrolled' ? 'J’ai commencé' : 'Marquer comme terminée';
+            card.appendChild(progressButton);
+          }
+          enrollmentList.appendChild(card);
+        });
+      };
+      renderEnrollments();
+      enrollmentList.addEventListener('click', async (event) => {
+        const button = event.target.closest('[data-enrollment-progress]');
+        if (!button) return;
+        button.disabled = true;
+        try {
+          const result = await api.updateEnrollmentStatus(
+            button.dataset.enrollmentProgress,
+            button.dataset.nextStatus,
+          );
+          const enrollment = enrollments.find((item) => String(item.id) === String(result.id));
+          if (enrollment) enrollment.status = result.status;
+          renderEnrollments();
+        } catch (error) {
+          console.error('Impossible de mettre à jour la progression:', error);
+          button.disabled = false;
+          button.textContent = 'Erreur — réessayer';
+        }
+      });
+    });
+  </script>
 </body>
 </html>

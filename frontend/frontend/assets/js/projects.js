@@ -1,5 +1,5 @@
-// Projects page specific JavaScript
-// Projects display with API integration
+// JavaScript propre à la page Projets.
+// Affichage des projets avec intégration de l’API.
 
 class ProjectsPage {
     constructor() {
@@ -13,19 +13,19 @@ class ProjectsPage {
         this.setupProjectLinks();
     }
 
-    // Load projects from API
+    // Charger les projets depuis l’API.
     async loadProjects() {
         try {
             const data = await api.getProjects();
             this.projects = data.results || data; // Handle pagination if present
         } catch (error) {
             console.error('Failed to load projects:', error);
-            // Fallback to static data or show error message
+            // Utiliser les données statiques en secours ou afficher un message d’erreur.
             this.showError('Unable to load projects. Please try again later.');
         }
     }
 
-    // Render projects dynamically
+    // Afficher les projets de manière dynamique.
     renderProjects() {
         const container = document.querySelector('#projects-page .grid');
         if (!container) return;
@@ -43,7 +43,7 @@ class ProjectsPage {
         });
     }
 
-    // Create project card element
+    // Créer un élément de carte de projet.
     createProjectCard(project) {
         const card = document.createElement('div');
         card.className = 'bg-gray-800 rounded-xl p-6 text-white hover:transform hover:scale-105 transition-all duration-300';
@@ -67,7 +67,7 @@ class ProjectsPage {
         return card;
     }
 
-    // Show no projects message
+    // Afficher un message indiquant qu’il n’y a aucun projet.
     showNoProjects() {
         const container = document.querySelector('#projects-page .grid');
         if (container) {
@@ -85,9 +85,9 @@ class ProjectsPage {
         }
     }
 
-    // Setup project links (if needed)
+    // Configurer les liens des projets, si nécessaire.
     setupProjectLinks() {
-        // Add hover effects or click handlers for project cards
+        // Ajouter des effets au survol ou des gestionnaires de clic aux cartes de projet.
         const projectCards = document.querySelectorAll('.bg-gray-800.rounded-xl');
         projectCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -101,7 +101,7 @@ class ProjectsPage {
         });
     }
 
-    // Show error message
+    // Afficher un message d’erreur.
     showError(message) {
         const container = document.querySelector('#projects-page .grid');
         if (container) {
@@ -119,7 +119,7 @@ class ProjectsPage {
     }
 }
 
-// Initialize when DOM is loaded
+// Initialiser lorsque le DOM est chargé.
 document.addEventListener('DOMContentLoaded', () => {
     new ProjectsPage();
 });

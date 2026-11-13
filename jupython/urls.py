@@ -16,10 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_simplejwt.views import TokenRefreshView
+from accounts.api import TokenObtainPairAPIView
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,23 +25,28 @@ from django.shortcuts import render
 from django.template import TemplateDoesNotExist
 from django.http import Http404
 from django.urls import re_path
+from core.views import health_check
 
 urlpatterns = [
+    path('health/', health_check, name='health_check'),
     path('admin/', admin.site.urls),
 
     path('api/accounts/', include('accounts.urls')),
+    path('api/', include('core.urls')),
     path('api/', include('academy.urls')),
     path('api/enrollments/', include('academy.enrollments_urls')),
     path('api/ranking/', include('ranking.urls')),
-    # Token endpoints (alternate access)
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # Points de terminaison des jetons (accès alternatif)
+    path('api/token/', TokenObtainPairAPIView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    # Serve the frontend index at project root
+    # Servir la page d’accueil du frontend à la racine du projet
     path('', TemplateView.as_view(template_name='index.html')),
 ]
 
-# During development serve static assets from the frontend assets folder
+# En développement, servir les fichiers statiques depuis le dossier des ressources du frontend.
+urlpatterns += static('/images/', document_root=settings.BASE_DIR / 'frontend' / 'frontend' / 'images')
 urlpatterns += static(settings.STATIC_URL, document_root=settings.BASE_DIR / 'frontend' / 'frontend' / 'assets')
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 def _render_frontend_template(request, template_path):
@@ -52,18 +55,18 @@ def _render_frontend_template(request, template_path):
     This allows serving files like /about.html or /academy/login.html using
     the templates located in frontend/frontend/.
     """
-    # security: prevent directory traversal
+    # Sécurité : empêcher la traversée des répertoires.
     if '..' in template_path or template_path.startswith('/'):
         raise Http404()
 
     try:
-        return render(request, template_path)
+        return render(request, template_path, {'GOOGLE_CLIENT_ID': getattr(settings, 'GOOGLE_CLIENT_ID', '')})
     except TemplateDoesNotExist:
         raise Http404()
 
 
-# Serve direct HTML files from the frontend folder (only .html).
-# Keep these patterns after API routes to avoid interfering with them.
+# Servir directement les fichiers HTML du frontend (uniquement les fichiers .html).
+# Garder ces routes après celles de l’API pour éviter toute interférence.
 urlpatterns += [
     re_path(r'^(?P<template_path>.+\.html)$', _render_frontend_template),
 ]

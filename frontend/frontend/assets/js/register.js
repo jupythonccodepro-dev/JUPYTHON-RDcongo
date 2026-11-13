@@ -1,5 +1,5 @@
 /**
- * Jupython Register Page
+ * Page d’inscription Jupython
  * Gère l'inscription des nouveaux utilisateurs
  */
 
@@ -9,7 +9,31 @@ class RegisterPage {
     }
 
     init() {
+        this.preserveReturnPath();
         this.setupFormValidation();
+        this.setupGoogleLogin();
+    }
+
+    preserveReturnPath() {
+        const next = new URLSearchParams(window.location.search).get('next');
+        if (!next) return;
+        const accountLink = document.querySelector(`a[href="login.html"]`);
+        if (accountLink) accountLink.href = `login.html?next=${encodeURIComponent(next)}`;
+    }
+
+    getPostAuthDestination() {
+        const requested = new URLSearchParams(window.location.search).get('next');
+        if (!requested) return '/academy/dashboard.html';
+        try {
+            const destination = new URL(requested, window.location.origin);
+            const authPages = ['/academy/login.html', '/academy/register.html'];
+            if (destination.origin === window.location.origin && !authPages.includes(destination.pathname)) {
+                return `${destination.pathname}${destination.search}${destination.hash}`;
+            }
+        } catch (error) {
+            console.warn('Destination de retour ignor?e:', error);
+        }
+        return '/academy/dashboard.html';
     }
 
     /**
@@ -23,6 +47,43 @@ class RegisterPage {
         }
 
         registerForm.addEventListener('submit', (e) => this.handleRegisterSubmit(e));
+    }
+
+    setupGoogleLogin() {
+        const googleButton = document.getElementById('googleRegisterBtn');
+        if (!googleButton) return;
+
+        window.setupGoogleAuthButton(
+            googleButton,
+            this.handleGoogleCredentialResponse.bind(this),
+        );
+    }
+
+    async handleGoogleCredentialResponse(response) {
+        try {
+            const result = await api.request('/accounts/google-login/', {
+                method: 'POST',
+                body: JSON.stringify({ id_token: response.credential }),
+            });
+
+            if (result && result.access) {
+                localStorage.setItem('access_token', result.access);
+                localStorage.setItem('refresh_token', result.refresh);
+                if (result.user) {
+                    localStorage.setItem('user', JSON.stringify(result.user));
+                }
+                api.token = result.access;
+                this.showSuccess(document.querySelector('form'), 'Inscription Google réussie.');
+                setTimeout(() => {
+                    window.location.href = this.getPostAuthDestination();
+                }, 1200);
+            } else {
+                throw new Error(result?.error || 'Inscription Google impossible');
+            }
+        } catch (error) {
+            console.error('Erreur inscription Google:', error);
+            this.showError(null, error?.message || 'Inscription Google impossible');
+        }
     }
 
     /**
@@ -76,7 +137,7 @@ class RegisterPage {
             submitButton.textContent = 'Inscription en cours...';
 
             const result = await api.register({
-                username: email.value, // Utiliser l'email comme username par défaut
+                username: email.value,
                 fullname: fullname.value,
                 email: email.value,
                 university: university.value,
@@ -84,19 +145,18 @@ class RegisterPage {
                 password: password.value
             });
 
-            if (result && (result.user_id || result.id)) {
-                this.showSuccess(form, 'Inscription réussie! ✅');
+            if (result && (result.user_id || result.id || result.access)) {
+                this.showSuccess(form, 'Inscription réussie.');
                 setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
+                    window.location.href = this.getPostAuthDestination();
+                }, 1200);
             } else {
-                this.showError(form, 'Erreur d\'inscription');
-                submitButton.disabled = false;
-                submitButton.textContent = 'S\'inscrire';
+                throw new Error('Erreur d\'inscription');
             }
         } catch (error) {
             console.error('Erreur inscription:', error);
-            this.showError(form, error.message || 'Erreur lors de l\'inscription. Vérifiez vos données.');
+            const backendMessage = error?.data?.email?.[0] || error?.data?.detail || error?.message || 'Erreur lors de l\'inscription. Vérifiez vos données.';
+            this.showError(form, backendMessage);
             submitButton.disabled = false;
             submitButton.textContent = 'S\'inscrire';
         }
@@ -120,7 +180,7 @@ class RegisterPage {
         if (element) {
             const errorDiv = document.createElement('div');
             errorDiv.className = 'text-red-500 text-sm mt-1 error-message';
-            errorDiv.textContent = '❌ ' + message;
+            errorDiv.textContent = message;
             element.parentNode.insertBefore(errorDiv, element.nextSibling);
             element.classList.add('border-red-500');
         } else {

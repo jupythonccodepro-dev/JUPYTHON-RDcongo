@@ -1,5 +1,5 @@
-// Contact page specific JavaScript
-// Contact form validation
+// JavaScript propre à la page Contact.
+// Validation du formulaire de contact.
 
 class ContactPage {
     constructor() {
@@ -11,7 +11,7 @@ class ContactPage {
         this.setupFormFeedback();
     }
 
-    // Setup form validation
+    // Configurer la validation du formulaire.
     setupFormValidation() {
         const contactForm = document.querySelector('form[action="/contact"]');
         if (contactForm) {
@@ -19,7 +19,7 @@ class ContactPage {
         }
     }
 
-    // Contact form validation and submission
+    // Valider et envoyer le formulaire de contact.
     async validateContactForm(e) {
         e.preventDefault();
 
@@ -31,7 +31,7 @@ class ContactPage {
 
         let isValid = true;
 
-        // Name validation
+        // Validation du nom.
         if (!name.value.trim()) {
             this.showError(name, 'Le nom est requis');
             isValid = false;
@@ -39,7 +39,7 @@ class ContactPage {
             this.clearError(name);
         }
 
-        // Email validation
+        // Validation de l’adresse e-mail.
         if (!this.isValidEmail(email.value)) {
             this.showError(email, 'Veuillez entrer une adresse email valide');
             isValid = false;
@@ -47,7 +47,7 @@ class ContactPage {
             this.clearError(email);
         }
 
-        // Message validation
+        // Validation du message.
         if (!message.value.trim()) {
             this.showError(message, 'Le message est requis');
             isValid = false;
@@ -57,7 +57,7 @@ class ContactPage {
 
         if (!isValid) return;
 
-        // Submit via API
+        // Envoyer via l’API.
         try {
             submitButton.disabled = true;
             submitButton.textContent = 'Envoi en cours...';
@@ -83,13 +83,13 @@ class ContactPage {
         }
     }
 
-    // Email validation helper
+    // Fonction utilitaire de validation de l’adresse e-mail.
     isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 
-    // Show error message
+    // Afficher un message d’erreur.
     showError(input, message) {
         this.clearError(input);
         const errorDiv = document.createElement('div');
@@ -99,7 +99,7 @@ class ContactPage {
         input.classList.add('border-red-500');
     }
 
-    // Clear error message
+    // Effacer le message d’erreur.
     clearError(input) {
         const existingError = input.parentNode.querySelector('.error-message');
         if (existingError) {
@@ -108,7 +108,7 @@ class ContactPage {
         input.classList.remove('border-red-500');
     }
 
-    // Show success message
+    // Afficher un message de réussite.
     showSuccess(form, message) {
         const successDiv = document.createElement('div');
         successDiv.className = 'text-green-500 text-sm mt-4 success-message';
@@ -120,7 +120,7 @@ class ContactPage {
         }, 3000);
     }
 
-    // Setup form feedback
+    // Configurer les retours du formulaire.
     setupFormFeedback() {
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function () {
@@ -134,7 +134,7 @@ class ContactPage {
     }
 }
 
-// Initialize when DOM is loaded
+// Initialiser lorsque le DOM est chargé.
 document.addEventListener('DOMContentLoaded', () => {
     new ContactPage();
 });

@@ -1,6 +1,6 @@
 # Jupython Frontend
 
-Le frontend de la plateforme Jupython est une application web statique développée pour promouvoir et gérer les certifications IT en Afrique. Cette interface utilisateur permet aux étudiants, enseignants et administrateurs d'interagir avec la plateforme de manière intuitive et responsive.
+Le frontend de la plateforme Jupython est une application web statique pour présenter des parcours d’apprentissage numériques et suivre la progression des apprenants. Les certificats professionnels éventuels sont délivrés par les organismes de formation externes, pas par Jupython.
 
 ## 🚀 Technologies Utilisées
 
@@ -19,6 +19,7 @@ frontend/
 ├── contact.html                 # Page de contact
 ├── courses.html                 # Catalogue des formations
 ├── projects.html                # Projets et réalisations
+├── services.html                # Services en préparation
 ├── rankings.html                # Classements des étudiants
 ├── article-*.html              # Articles du blog
 ├── academy/
@@ -58,6 +59,7 @@ frontend/
 - **À propos** : Histoire, équipe et valeurs de Jupython
 - **Formations** : Catalogue des cours disponibles avec filtres
 - **Projets** : Réalisations des étudiants
+- **Nos services** : Présentation des services et ressources en préparation
 - **Classements** : Tableau d'excellence des étudiants certifiés
 - **Contact** : Formulaire de contact avec validation
 - **Blog** : Articles sur les certifications et technologies
